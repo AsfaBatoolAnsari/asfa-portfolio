@@ -1,0 +1,4 @@
+#dMeta { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; align-items: stretch; }
+@media (max-width: 767px) {
+  #dMeta { grid-template-columns: minmax(0,1fr); }
+}

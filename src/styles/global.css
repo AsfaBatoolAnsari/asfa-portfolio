@@ -1,0 +1,126 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0C0B0A;
+  color: #F5F1EA;
+  font-family: 'Instrument Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #F5F1EA; text-decoration: none; }
+a:hover { color: #F0661E; }
+::selection { background: #F0661E; color: #12100E; }
+
+@keyframes drift1 {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(6vw,-4vh) scale(1.12); }
+  100% { transform: translate(-3vw,3vh) scale(1); }
+}
+@keyframes drift2 {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-7vw,5vh) scale(1.08); }
+  100% { transform: translate(4vw,-3vh) scale(.96); }
+}
+@keyframes up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+[data-up] { animation: up .7s cubic-bezier(.2,.7,.25,1) both; }
+
+soft-aurora, grainient-bg, light-rays, galaxy-bg, magic-rings {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; font-weight: 500; }
+.nav-trigger { display: none; }
+@media (max-width: 779px) {
+  .nav-links { display: none; }
+  .nav-cta-desktop { display: none; }
+  .nav-trigger { display: inline-flex; }
+}
+
+/* shared glass-card look used by Designs/DesignDetail/ProjectDetail */
+.glass {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(52,43,36,0.9), rgba(30,25,21,0.93));
+  box-shadow: 0 18px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+@supports ((-webkit-backdrop-filter: blur(4px)) or (backdrop-filter: blur(4px))) {
+  .glass {
+    background: linear-gradient(160deg, rgba(56,46,38,0.6), rgba(28,23,19,0.64));
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(1.2);
+  }
+}
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(155deg, rgba(255,255,255,0.3), rgba(255,255,255,0.06) 32%, rgba(240,102,30,0.14) 66%, rgba(255,255,255,0.04));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* project / design card used by Projects, ProjectDetail (adjacent nav is plain, cards below are the grid tiles) */
+[data-proj] {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 22px;
+  overflow: hidden;
+  padding: 12px;
+  box-sizing: border-box;
+  color: #F5F1EA;
+  background: linear-gradient(160deg, rgba(52,43,36,0.9), rgba(34,29,24,0.92) 50%, rgba(27,23,19,0.94));
+  box-shadow: 0 18px 50px rgba(0,0,0,0.42), 0 0 36px rgba(240,102,30,0.05), inset 0 1px 0 rgba(255,255,255,0.12);
+  transition: transform .35s cubic-bezier(.2,.7,.25,1), box-shadow .35s ease, filter .35s ease;
+  display: flex;
+  flex-direction: column;
+}
+@supports ((-webkit-backdrop-filter: blur(4px)) or (backdrop-filter: blur(4px))) {
+  [data-proj] {
+    background: linear-gradient(160deg, rgba(58,48,39,0.66), rgba(36,30,25,0.64) 50%, rgba(28,23,19,0.68));
+    -webkit-backdrop-filter: blur(18px) saturate(1.25);
+    backdrop-filter: blur(18px) saturate(1.25);
+  }
+}
+[data-proj]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(155deg, rgba(255,255,255,0.32), rgba(255,255,255,0.07) 30%, rgba(240,102,30,0.15) 65%, rgba(255,255,255,0.04));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+[data-proj]:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 56px rgba(240,102,30,0.14), inset 0 1px 0 rgba(255,255,255,0.16);
+  filter: brightness(1.04);
+  color: #F5F1EA;
+}
+[data-pmedia] { transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+[data-proj]:hover [data-pmedia] { transform: scale(1.035); }
+[data-arrow] { transition: transform .3s ease, background .3s ease, color .3s ease; }
+[data-proj]:hover [data-arrow] { transform: translate(3px,-3px); background: #F0661E; color: #12100E; border-color: #F0661E; }
+[data-vlink] { transition: color .3s ease; }
+[data-vlink] span { display: inline-block; transition: transform .3s ease; }
+[data-proj]:hover [data-vlink] { color: #F0661E; }
+[data-proj]:hover [data-vlink] span { transform: translate(2px,-2px); }
+
+#ftGrid { display: grid; grid-template-columns: 1.35fr 0.75fr 1fr; gap: clamp(32px,5vw,64px); }
+#ftGrid a svg { width: 17px; height: 17px; }
+@media (max-width: 899px) {
+  #ftGrid { grid-template-columns: minmax(0,1fr); }
+}

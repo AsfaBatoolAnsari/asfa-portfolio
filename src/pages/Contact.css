@@ -1,0 +1,11 @@
+#nav { transition: background .35s ease, box-shadow .35s ease, border-color .35s ease; }
+
+#quickRow { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 719px) {
+  #quickRow { grid-template-columns: minmax(0,1fr); }
+}
+
+#cGrid { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(24px,3vw,40px); align-items: stretch; margin-top: 22px; }
+@media (max-width: 849px) {
+  #cGrid { grid-template-columns: minmax(0,1fr); }
+}

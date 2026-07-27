@@ -1,0 +1,16 @@
+#ndaGrid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; }
+#pGrid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 22px; }
+#featWrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(10px,2vw,24px); align-items: center; }
+#featWrap [data-pmedia] { aspect-ratio: 16/11; }
+@media (max-width: 859px) {
+  #featWrap { grid-template-columns: minmax(0,1fr); }
+  #featWrap [data-pmedia] { aspect-ratio: 16/9; }
+}
+@media (max-width: 979px) {
+  #ndaGrid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 639px) {
+  #ndaGrid, #pGrid { grid-template-columns: minmax(0,1fr); }
+}
+[data-feat]:hover [data-vlink] { gap: 13px; }
+[data-vlink] { transition: gap .25s ease; }
