@@ -73,7 +73,7 @@ export const projects = [
     hero: '/assets/projects/car-parking-hero.jpg',
     gallery: ['/assets/projects/images/car_parking1.png', '/assets/projects/images/car_parking2.png', '/assets/projects/images/car_parking3.png'],
   },
-  
+  {
     slug: 'portfolio-website',
     type: 'public',
     title: 'Portfolio Website',
