@@ -13,12 +13,13 @@ const mapProject = (p: (typeof projects)[number]) => ({
   year: p.year || p.timeline || '',
   catUpper: p.category.toUpperCase(),
   tags: (p.tools || []).slice(0, 4),
+  image: p.image,
 });
 
 export default function Projects() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  const pub = projects.filter((p) => p.type === 'public' && p.slug !== 'fitpulse-tracker').map(mapProject);
+  const pub = projects.filter((p) => p.type === 'public').map(mapProject);
   const featured = pub[0] || null;
   const restList = pub.slice(1);
   const ndaList = projects.filter((p) => p.type === 'nda').map(mapProject);
@@ -49,7 +50,7 @@ export default function Projects() {
           <Link data-proj="1" data-feat="1" to={`/projects/${featured.slug}`} style={{ display: 'block', marginTop: 'clamp(36px,5vw,52px)' }}>
             <div id="featWrap">
               <div data-pmedia="1" style={sx('position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#2C2620,#1C1815)')}>
-                <image-slot id={`proj-list-${featured.slug}`} shape="rect" placeholder={`Drop the ${featured.title} preview`}></image-slot>
+                <image-slot id={`proj-list-${featured.slug}`} src={featured.image} shape="rect" placeholder="Paste image URL here"></image-slot>
               </div>
               <div style={{ minWidth: 0, padding: 'clamp(8px,2vw,22px) clamp(8px,1.5vw,18px)' }}>
                 <div style={sx("font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.22em;color:#F0661E")}>{featured.catUpper} · {featured.year}</div>
@@ -72,7 +73,7 @@ export default function Projects() {
           {restList.map((p) => (
             <Link key={p.slug} data-proj="1" to={`/projects/${p.slug}`} style={{ display: 'block' }}>
               <div data-pmedia="1" style={sx('position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#2C2620,#1C1815)')}>
-                <image-slot id={`proj-list-${p.slug}`} shape="rect" placeholder={`Drop the ${p.title} preview`}></image-slot>
+                <image-slot id={`proj-list-${p.slug}`} src={p.image} shape="rect" placeholder="Paste image URL here"></image-slot>
               </div>
               <div style={sx('display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 8px 8px')}>
                 <div style={sx('min-width:0')}>

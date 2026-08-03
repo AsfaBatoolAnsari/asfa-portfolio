@@ -10,6 +10,75 @@ a { color: #F5F1EA; text-decoration: none; }
 a:hover { color: #F0661E; }
 ::selection { background: #F0661E; color: #12100E; }
 
+/* ==========================================================================
+   Premium custom scrollbar — single global source, themed via tokens below.
+   Desktop/fine-pointer devices only ((hover:hover) and (pointer:fine)) so
+   touch devices always keep native OS scrolling untouched. Uses the
+   browser's real scroll position — there is no JS/virtual-scrollbar library,
+   so there is nothing here that can desync from actual scroll progress.
+   ========================================================================== */
+:root {
+  --sb-size: 5px;
+  --sb-size-hover: 7px;
+  --sb-radius: 999px;
+  --sb-thumb-bg:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 255, 255, 0.02) 100%),
+    rgba(240, 102, 30, 0.55);
+  --sb-thumb-bg-hover:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.03) 100%),
+    rgba(255, 138, 64, 0.75);
+  --sb-thumb-bg-active:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.22) 40%, rgba(255, 255, 255, 0.04) 100%),
+    rgba(255, 122, 46, 0.9);
+  --sb-thumb-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  --sb-thumb-shadow-hover: 0 1px 4px rgba(0, 0, 0, 0.35), 0 0 8px rgba(240, 102, 30, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  --sb-transition: background .25s ease, box-shadow .25s ease, width .2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(240, 102, 30, 0.6) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: var(--sb-size);
+    height: var(--sb-size);
+  }
+  ::-webkit-scrollbar:hover {
+    width: var(--sb-size-hover);
+    height: var(--sb-size-hover);
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-bg);
+    background-clip: padding-box;
+    border: 1px solid transparent;
+    background-origin: border-box;
+    border-radius: var(--sb-radius);
+    box-shadow: var(--sb-thumb-shadow);
+    transition: var(--sb-transition);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--sb-thumb-bg-hover);
+    box-shadow: var(--sb-thumb-shadow-hover);
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: var(--sb-thumb-bg-active);
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::-webkit-scrollbar-thumb {
+      transition: none;
+    }
+  }
+}
+
 @keyframes drift1 {
   0% { transform: translate(0,0) scale(1); }
   50% { transform: translate(6vw,-4vh) scale(1.12); }

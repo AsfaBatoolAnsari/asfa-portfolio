@@ -5,22 +5,25 @@ import { Hoverable } from '../components/Hoverable';
 import { MobileNavPanel, MobileNavTrigger } from '../components/MobileNavMenu';
 import { useIntroTimeline } from '../hooks/useIntroTimeline';
 import { sx } from '../lib/sx';
+import { findProject, findDesign } from '../data/portfolio';
 import './Home.css';
 
 // Projects data for the home page's category-filtered grid — a separate, smaller
 // list than src/data/portfolio.ts, exactly as the original design authored it
 // (the full case-study data lives on the dedicated Projects/ProjectDetail pages).
-const PROJ_CATS = ['Mobile App', 'Web App', 'Website', 'Dashboard', 'UX Research', 'Prototype'];
+const PROJ_CATS = ['Mobile App', 'Web App', 'Website', 'Dashboard', 'Prototype'];
 const PROJECTS = [
-  { cats: ['Mobile App', 'Prototype', 'UX Research'], title: 'Happy Present', slug: 'happy-present' },
-  { cats: ['Dashboard', 'Web App', 'UX Research'], title: 'FinFlow Dashboard', slug: 'finflow-dashboard' },
-  { cats: ['Website', 'UX Research', 'Prototype'], title: 'ShopWave Storefront', slug: 'shopwave-storefront' },
-  { cats: ['Web App', 'Website', 'Dashboard'], title: 'TaskLoop SaaS', slug: 'taskloop-saas' },
-  { cats: ['Mobile App', 'Website', 'Prototype'], title: 'Parking Time', slug: 'parking-time' },
-  { cats: ['Mobile App', 'Dashboard', 'Web App'], title: 'FitPulse Tracker', slug: 'fitpulse-tracker' },
-  { cats: ['Mobile App', 'Prototype'], title: 'Donatefy Tap-to-Pay', slug: 'donatefy', nda: true },
-  { cats: ['Mobile App', 'Web App'], title: 'Neobank Mobile App', slug: 'neobank-app', nda: true },
-  { cats: ['UX Research', 'Website', 'Dashboard'], title: 'Healthcare Portal', slug: 'health-portal', nda: true },
+  { cats: ['Mobile App', 'Prototype'], title: 'Happy Present', slug: 'happy-present' },
+  { cats: ['Mobile App'], title: 'Car Parking', slug: 'car-parking' },
+  { cats: ['Mobile App', 'Prototype'], title: 'Donatefy Tap-to-Pay', slug: 'donatefy-tap-to-pay', nda: true },
+  { cats: ['Web App', 'Prototype'], title: 'BSEK Education Portal', slug: 'bsek-education-portal' },
+  { cats: ['Web App'], title: 'Donatefy eFund', slug: 'donatefy-efund', nda: true },
+  { cats: ['Web App', 'Dashboard'], title: 'Inwirement', slug: 'inwirement', nda: true },
+  { cats: ['Website'], title: 'Portfolio Website', slug: 'portfolio-website' },
+  { cats: ['Website'], title: 'Cybersecurity Awareness', slug: 'cybersecurity-awareness', nda: true },
+  { cats: ['Website'], title: 'Accurate Group', slug: 'accurate-group', nda: true },
+  { cats: ['Dashboard'], title: '365 Taskers', slug: '365-taskers' },
+  { cats: ['Dashboard'], title: 'Donatefy CRM', slug: 'donatefy-crm', nda: true },
 ];
 
 const SKILLS_LEFT = [
@@ -37,23 +40,29 @@ const SKILLS_RIGHT = [
 ];
 
 const SERVICES = [
-  { n: '01', title: 'UI/UX Design', desc: 'End-to-end product design — research, user flows, wireframes and polished high-fidelity interfaces for web and mobile applications.', tags: ['FIGMA', 'PROTOTYPING', 'SAAS', 'DASHBOARDS', 'MOBILE APPS'], icon: <path d="M4 20l4.5-1L18 9.5a2.12 2.12 0 0 0-3-3L5.5 16 4 20Z"></path> },
-  { n: '02', title: 'Website Design', desc: 'Marketing sites, landing pages and portfolios that communicate clearly, feel premium and convert visitors into customers.', tags: ['LANDING PAGES', 'E-COMMERCE', 'RESPONSIVE'], icon: <><rect x="2" y="4" width="13.5" height="10" rx="1.8"></rect><path d="M6 17h5.5"></path><rect x="15.5" y="9" width="6.5" height="11" rx="1.8"></rect><path d="M18 17.3h1.6"></path></> },
-  { n: '03', title: 'Design Systems', desc: 'Reusable component libraries, tokens and guidelines that keep growing products consistent, accessible and easy to scale.', tags: ['COMPONENTS', 'TOKENS', 'GUIDELINES'], icon: <><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"></rect><rect x="13" y="3.5" width="7.5" height="7.5" rx="2" opacity="0.55"></rect><rect x="3.5" y="13" width="7.5" height="7.5" rx="2" opacity="0.55"></rect><rect x="13" y="13" width="7.5" height="7.5" rx="2"></rect></> },
-  { n: '04', title: 'Mobile App Design', desc: 'User-centred iOS and Android app design — from flows and wireframes to pixel-perfect screens ready for development.', tags: ['IOS', 'ANDROID', 'APP FLOWS'], icon: <><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M10.5 18.5h3"></path></> },
-  { n: '05', title: 'Branding & Creative', desc: 'Distinctive brand systems for digital products — logo, color, typography and creative direction that stay consistent across every screen.', tags: ['LOGO', 'COLOR', 'TYPOGRAPHY'], icon: <><path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-1 1.9-1.9 0-1.2-.9-1.4-.9-2.3 0-.75.65-1.4 1.5-1.4H17a3.5 3.5 0 0 0 3.5-3.5c0-4.2-3.8-7.4-8.5-7.4Z"></path><circle cx="7.5" cy="12" r="1"></circle><circle cx="9.5" cy="8" r="1"></circle><circle cx="14" cy="7.5" r="1"></circle></> },
-  { n: '06', title: 'UX Research', desc: 'User interviews, usability testing and journey mapping that ground every design decision in real user needs, not guesswork.', tags: ['INTERVIEWS', 'USABILITY', 'INSIGHTS'], icon: <><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></> },
+  { n: '01', title: 'UI/UX Design', desc: 'Designing websites, web applications, dashboards, and mobile apps with a focus on usability, responsive design, and consistent user experiences.', tags: ['FIGMA', 'PROTOTYPING', 'DESIGN SYSTEM', 'DASHBOARDS', 'MOBILE APPS'], icon: <path d="M4 20l4.5-1L18 9.5a2.12 2.12 0 0 0-3-3L5.5 16 4 20Z"></path> },
+  { n: '02', title: 'Website Design', desc: 'Designing responsive marketing, corporate, e-commerce, and educational websites with clear navigation and engaging user experiences.', tags: ['LANDING PAGES', 'E-COMMERCE', 'RESPONSIVE'], icon: <><rect x="2" y="4" width="13.5" height="10" rx="1.8"></rect><path d="M6 17h5.5"></path><rect x="15.5" y="9" width="6.5" height="11" rx="1.8"></rect><path d="M18 17.3h1.6"></path></> },
+  { n: '03', title: 'Design Systems', desc: 'Building scalable design systems with reusable components, consistent styles, and responsive UI patterns across digital products.', tags: ['COMPONENTS', 'TOKENS', 'GUIDELINES', 'AUTO LAYOUT', 'VARIABLES'], icon: <><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"></rect><rect x="13" y="3.5" width="7.5" height="7.5" rx="2" opacity="0.55"></rect><rect x="3.5" y="13" width="7.5" height="7.5" rx="2" opacity="0.55"></rect><rect x="13" y="13" width="7.5" height="7.5" rx="2"></rect></> },
+  { n: '04', title: 'Mobile App Design', desc: 'Designing intuitive mobile applications with user-friendly navigation, responsive layouts, and seamless experiences across Android and iOS.', tags: ['IOS', 'ANDROID', 'APP FLOWS', 'PROTOTYPING'], icon: <><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M10.5 18.5h3"></path></> },
+  { n: '05', title: 'Branding & Creative', desc: 'Creating brand assets, brochures, social media creatives, and marketing materials that maintain a consistent visual identity across digital platforms.', tags: ['LOGO', 'Branding', 'TYPOGRAPHY'], icon: <><path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-1 1.9-1.9 0-1.2-.9-1.4-.9-2.3 0-.75.65-1.4 1.5-1.4H17a3.5 3.5 0 0 0 3.5-3.5c0-4.2-3.8-7.4-8.5-7.4Z"></path><circle cx="7.5" cy="12" r="1"></circle><circle cx="9.5" cy="8" r="1"></circle><circle cx="14" cy="7.5" r="1"></circle></> },
+  { n: '06', title: 'UX Research', desc: 'Understanding user needs through research, competitor analysis, and user flows to create intuitive and practical digital experiences.', tags: ['WIREFRAMING', 'USABILITY', 'INSIGHTS', 'INFORMATION ARCHITECHTURE'], icon: <><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></> },
 ];
 
 const EXPERIENCE = [
-  { date: 'JAN 2025 – JUNE 2026', role: 'UX / UI Designer', org: 'AmeriCloud Solutions', desc: 'Designing across SaaS, web and mobile — ensuring consistency and user-centered design across platforms.', current: true },
-  { date: 'NOV 2024 – 2025', role: 'Junior UX / UI Designer', org: 'SplitConvert', desc: 'Redesigned a Shopify-based e-commerce experience to improve usability and modernize the visual system.' },
-  { date: 'APR – MAY 2023', role: 'Intern UX / UI Designer', org: 'Pixolie Lab', desc: 'Worked on mobile apps and websites with a focus on clean layouts and strong usability.' },
+  { date: 'JAN 2025 – JUNE 2026', role: 'UX / UI Designer', org: 'AmeriCloud Solutions', desc: 'Designed websites, web applications, SaaS dashboards, branding assets, brochures, and social media marketing creatives for multiple client projects.', current: true },
+  { date: 'NOV 2024 – 2025', role: 'Junior UX / UI Designer', org: 'SplitConvert', desc: 'Redesigned responsive Shopify e-commerce stores with a focus on usability, user experience, and conversion optimization.' },
+  { date: 'APR – MAY 2023', role: 'Intern UX / UI Designer', org: 'Pixolie Lab', desc: 'Designed web applications, mobile apps, and e-commerce platforms for multiple client projects across different industries.' },
 ];
 const EDUCATION = [
-  { date: '2023 – PRESENT', role: 'BS Information Technology', org: 'Virtual University', desc: "Currently pursuing a Bachelor's degree in Information Technology.", current: true },
-  { date: '2022 – 2023', role: 'UI / UX Designer', org: 'Institute of Emerging Career (IEC)', desc: 'Intensive UI/UX track — bootcamp projects, design systems and key user flows.' },
-  { date: '2022', role: 'Web Designing', org: 'Slim Coder Academy', desc: 'Front-end development with HTML, CSS, JavaScript and core design principles.' },
+  { date: '2023 – PRESENT', role: 'BB Information Technology', org: 'Virtual University', desc: "Currently pursuing a Bachelor's degree in Business & Information Technology with a focus on technology, business, and digital solutions.", current: true },
+  { date: '2022 – 2023', role: 'UI / UX Designer', org: 'Institute of Emerging Career (IEC)', desc: 'Completed hands-on UI/UX design training covering UX research, wireframing, prototyping, design systems, and high-fidelity UI design.' },
+  { date: '2022', role: 'Web Designing', org: 'Slim Coder Academy', desc: 'Completed front-end development training covering HTML, CSS, Bootstrap, JavaScript, and responsive web development.' },
+];
+
+const TESTIMONIALS = [
+  { quote: 'Asfa consistently delivered clean, well-structured designs and was always open to feedback. Her attention to detail and ability to improve user experience made the collaboration smooth and efficient.', role: 'Client' },
+  { quote: 'She redesigned our product with a strong focus on usability and visual consistency. Communication was clear, deadlines were met, and the final designs were ready for development.', role: 'Project Manager' },
+  { quote: 'From dashboards to responsive websites, Asfa handled every project professionally. Her designs were thoughtful, organized, and easy for our development team to implement.', role: 'Client' },
 ];
 
 const DESIGN_PICKS = [
@@ -73,7 +82,7 @@ export default function Home() {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  const projList = PROJECTS.filter((p) => p.cats.includes(projCat) && !p.nda);
+  const projList = PROJECTS.filter((p) => p.cats.includes(projCat));
 
   return (
     <div style={sx('position:relative;min-height:100vh;background:#0C0B0A;overflow-x:clip')}>
@@ -114,21 +123,21 @@ export default function Home() {
                   <Link to="/projects" style={{ color: '#A29889' }}>Projects</Link>
                   <Link to="/designs" style={{ color: '#A29889' }}>Designs</Link>
                   <Link to="/contact" style={{ color: '#A29889' }}>Contact</Link>
-                  <Link id="hnCta" to="/contact" style={{ color: '#F0661E', border: '1px solid rgba(240,102,30,0.55)', borderRadius: 999, padding: '9px 22px', fontSize: 14, whiteSpace: 'nowrap' }}>Let's talk</Link>
                 </div>
+                <Link id="hnCta" to="/contact" style={{ color: '#F0661E', border: '1px solid rgba(240,102,30,0.55)', borderRadius: 999, padding: '9px 22px', fontSize: 14, whiteSpace: 'nowrap' }}>Let's talk</Link>
               </nav>
               <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '96px 24px 48px', boxSizing: 'border-box', gap: 0 }}>
                 <div id="chip" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, border: '1px solid rgba(255,255,255,0.12)', borderRadius: 999, padding: '8px 18px', fontFamily: "'JetBrains Mono',monospace", fontSize: 11, letterSpacing: '0.18em', color: '#A29889' }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#F0661E', boxShadow: '0 0 10px rgba(240,102,30,0.9)' }} />UI/UX DESIGNER
                 </div>
-                <h1 style={{ margin: '26px 0 0', fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: 'clamp(42px,6.2vw,86px)', lineHeight: 1.05, letterSpacing: '-0.025em' }}>
+                <h1 id="heroTitle" style={{ margin: '26px 0 0', fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: 'clamp(42px,6.2vw,86px)', lineHeight: 1.05, letterSpacing: '-0.025em' }}>
                   <span style={{ display: 'block', overflow: 'hidden' }}><span id="m1a" style={{ display: 'block' }}>Designing interfaces</span></span>
                   <span style={{ display: 'block', overflow: 'hidden' }}><span id="m1b" style={{ display: 'block' }}>people <span style={{ color: '#F0661E' }}>remember.</span></span></span>
                 </h1>
                 <p id="desc" style={{ margin: '18px 0 0', maxWidth: 560, fontSize: 17, lineHeight: 1.65, color: '#A29889' }}>I turn complex problems into clean, considered digital experiences — from the first wireframe to polished, production-ready interfaces.</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 34, flexWrap: 'wrap', justifyContent: 'center' }}>
                   <Link id="btnP" to="/projects" style={{ display: 'inline-block', background: 'linear-gradient(135deg,#FF8A3D 0%,#EA5E14 48%,#C74208 100%)', color: '#FFF7F0', fontWeight: 600, fontSize: 15, borderRadius: 999, padding: '15px 32px', whiteSpace: 'nowrap', textShadow: '0 1px 2px rgba(0,0,0,0.25)', boxShadow: '0 10px 28px rgba(240,102,30,0.35), inset 0 1px 0 rgba(255,255,255,0.28)' }}>View my work</Link>
-                  <a id="btnG" href="https://www.linkedin.com/" target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: '#F5F1EA', fontWeight: 500, fontSize: 15, border: '1px solid rgba(255,255,255,0.16)', borderRadius: 999, padding: '13px 26px', whiteSpace: 'nowrap', boxShadow: '0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08)' }}>Connect on LinkedIn</a>
+                  <a id="btnG" href="https://www.linkedin.com/in/asfa-batool-ansari/" target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: '#F5F1EA', fontWeight: 500, fontSize: 15, border: '1px solid rgba(255,255,255,0.16)', borderRadius: 999, padding: '13px 26px', whiteSpace: 'nowrap', boxShadow: '0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08)' }}>Connect on LinkedIn</a>
                 </div>
               </div>
               <div id="scrollI" style={{ display: 'none' }} />
@@ -174,7 +183,7 @@ export default function Home() {
                     <span style={{ position: 'absolute', left: '50%', top: -3.5, width: 7, height: 7, marginLeft: -3.5, borderRadius: '50%', background: '#F0661E', boxShadow: '0 0 10px rgba(240,102,30,0.9)' }} />
                   </div>
                   <div style={{ position: 'relative', aspectRatio: '1', borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.14)', background: 'rgba(255,255,255,0.04)', boxShadow: '0 24px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.1)' }}>
-                    <image-slot id="portrait" shape="rect" style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '132%' }} placeholder="Drop your portrait here"></image-slot>
+                    <image-slot id="portrait" src="/assets/projects/images/About_img.png" shape="rect" style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '132%' }} placeholder="Paste image URL here"></image-slot>
                   </div>
                 </div>
                 <div id="v2right" data-rv="1" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -206,6 +215,20 @@ export default function Home() {
         </section>
 
         {/* ---------- SERVICES ---------- */}
+        {/* Mobile-only duplicate of the intro copy below, rendered in normal
+            scroll flow ABOVE the pinned #services section (not inside it) so
+            the sticky viewport only has to fit the card stack, not the text
+            too — the text+stack combined don't fit a single mobile screen
+            the way they comfortably do side-by-side on desktop. Kept outside
+            #services entirely so the pin/scroll-progress math (which measures
+            from #services' own top) is completely unaffected. */}
+        <div id="svcIntroMobile" style={{ maxWidth: 1240, margin: '0 auto', padding: '48px clamp(16px,4vw,32px) 0', boxSizing: 'border-box' }}>
+          <div data-rv="1" style={sx("display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);border-radius:999px;padding:8px 18px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.22em;color:#C9C0B4")}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#F0661E', boxShadow: '0 0 10px rgba(240,102,30,0.9)' }} />WHAT I DO
+          </div>
+          <h2 data-rv="1" style={{ margin: '22px 0 0', fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 'clamp(28px,3.2vw,44px)', lineHeight: 1.15, letterSpacing: '-0.02em' }}>Designing meaningful<br />digital experiences<br />that users <span style={{ color: '#F0661E' }}>enjoy.</span></h2>
+          <p data-rv="1" style={{ margin: '22px 0 0', maxWidth: '46ch', fontSize: 15.5, lineHeight: 1.7, color: '#A29889' }}>I focus on designing websites, web apps, dashboards, and mobile apps that are easy to use, visually consistent, and built with real users in mind.</p>
+        </div>
         <section id="services" style={{ position: 'relative' }}>
           <div id="svcSticky">
             <div id="svcPad" style={{ position: 'relative', width: '100%', maxWidth: 1240, margin: '0 auto', padding: '24px clamp(16px,4vw,32px)', boxSizing: 'border-box' }}>
@@ -217,7 +240,7 @@ export default function Home() {
                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#F0661E', boxShadow: '0 0 10px rgba(240,102,30,0.9)' }} />WHAT I DO
                   </div>
                   <h2 data-rv="1" style={{ margin: '22px 0 0', fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 'clamp(28px,3.2vw,44px)', lineHeight: 1.15, letterSpacing: '-0.02em' }}>Designing meaningful<br />digital experiences<br />that users <span style={{ color: '#F0661E' }}>enjoy.</span></h2>
-                  <p data-rv="1" style={{ margin: '22px 0 0', maxWidth: '46ch', fontSize: 15.5, lineHeight: 1.7, color: '#A29889' }}>My approach is simple: understand the real problem, map the flows, then design screens that are genuinely easy to use and a pleasure to look at. I stay close to the build so the final product matches the design — pixel for pixel.</p>
+                  <p data-rv="1" style={{ margin: '22px 0 0', maxWidth: '46ch', fontSize: 15.5, lineHeight: 1.7, color: '#A29889' }}>I focus on designing websites, web apps, dashboards, and mobile apps that are easy to use, visually consistent, and built with real users in mind.</p>
                 </div>
                 <div id="svcStackArea" style={{ minWidth: 0 }}>
                   {SERVICES.map((s) => (
@@ -306,12 +329,28 @@ export default function Home() {
           <div id="projGrid" data-count={String(projList.length)} style={{ position: 'relative', marginTop: 'clamp(36px,5vw,52px)' }}>
             {projList.map((p, i) => (
               <Link key={p.slug} data-proj="1" data-i={String(i)} to={`/projects/${p.slug}`} style={{ position: 'relative', border: '1px solid transparent', borderRadius: 22, overflow: 'hidden', padding: 12, boxSizing: 'border-box', boxShadow: '0 18px 50px rgba(0,0,0,0.42), 0 0 36px rgba(240,102,30,0.05), inset 0 1px 0 rgba(255,255,255,0.12)', color: '#F5F1EA' }}>
-                <div data-pmedia="1" style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 14, overflow: 'hidden', background: 'linear-gradient(160deg,#2C2620,#1C1815)' }}>
-                  <image-slot id={`proj-${p.slug}`} shape="rect" placeholder={`Drop the ${p.title} preview here`}></image-slot>
-                </div>
+                {p.nda ? (
+                  <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 14, overflow: 'hidden', background: 'linear-gradient(150deg,#241d18,#171310)' }}>
+                    <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(80% 70% at 78% 20%, rgba(240,102,30,0.16), transparent 60%)' }} />
+                    <div aria-hidden="true" style={{ position: 'absolute', left: '12%', top: '16%', right: '38%', height: 11, borderRadius: 6, background: 'rgba(255,255,255,0.06)' }} />
+                    <div aria-hidden="true" style={{ position: 'absolute', left: '12%', top: '26%', right: '22%', height: 8, borderRadius: 5, background: 'rgba(255,255,255,0.045)' }} />
+                    <div aria-hidden="true" style={{ position: 'absolute', left: '12%', bottom: '14%', right: '30%', height: 8, borderRadius: 5, background: 'rgba(255,255,255,0.04)' }} />
+                    <span style={sx("position:absolute;left:18px;top:18px;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(240,102,30,0.45);background:rgba(240,102,30,0.12);border-radius:999px;padding:6px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:#F0661E")}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+                      NDA
+                    </span>
+                    <span style={{ position: 'absolute', left: '50%', top: '54%', transform: 'translate(-50%,-50%)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 52, height: 52, borderRadius: 15, background: 'rgba(240,102,30,0.14)', border: '1px solid rgba(240,102,30,0.45)', boxShadow: '0 0 26px rgba(240,102,30,0.25)' }}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F0661E" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"></rect><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg>
+                    </span>
+                  </div>
+                ) : (
+                  <div data-pmedia="1" style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 14, overflow: 'hidden', background: 'linear-gradient(160deg,#2C2620,#1C1815)' }}>
+                    <image-slot id={`proj-${p.slug}`} src={findProject(p.slug)?.image} shape="rect" placeholder="Paste image URL here"></image-slot>
+                  </div>
+                )}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14, padding: '16px 8px 8px' }}>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, letterSpacing: '0.22em', color: '#F0661E' }}>{projCat.toUpperCase()}</div>
+                    <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, letterSpacing: '0.22em', color: '#F0661E' }}>{projCat.toUpperCase()}{p.nda ? ' · CONFIDENTIAL' : ''}</div>
                     <div style={{ marginTop: 6, fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 17.5, letterSpacing: '-0.01em' }}>{p.title}</div>
                   </div>
                   <span data-parrow="1" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.16)', background: 'rgba(255,255,255,0.05)', color: '#F5F1EA', flex: '0 0 auto' }}>
@@ -380,15 +419,14 @@ export default function Home() {
             <h2 data-rv="1" style={{ margin: '20px 0 0', fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 'clamp(28px,3.2vw,44px)', lineHeight: 1.15, letterSpacing: '-0.02em' }}>What people say about<br /><span style={{ color: '#F0661E' }}>working with me.</span></h2>
           </div>
           <div id="tstGrid" style={{ position: 'relative', marginTop: 'clamp(36px,5vw,52px)' }}>
-            {[0, 1, 2].map((i) => (
+            {TESTIMONIALS.map((t, i) => (
               <div key={i} data-tst="1" data-rv="1" style={{ padding: '26px 26px 24px', boxSizing: 'border-box' }}>
                 <div aria-hidden="true" style={{ color: '#F0661E', fontSize: 15, letterSpacing: 4, textShadow: '0 0 14px rgba(240,102,30,0.45)' }}>★★★★★</div>
-                <p style={{ position: 'relative', margin: '16px 0 0', fontSize: 14.5, lineHeight: 1.7, color: '#C9C0B4' }}>"Asfa translated a vague brief into a crisp, usable product. Her attention to flows and detail is rare."</p>
+                <p style={{ position: 'relative', margin: '16px 0 0', fontSize: 14.5, lineHeight: 1.7, color: '#C9C0B4' }}>"{t.quote}"</p>
                 <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 12, marginTop: 20 }}>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg,#FF8A3D,#EA5E14)', color: '#FFF7F0', fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 14, boxShadow: '0 6px 16px rgba(240,102,30,0.35), inset 0 1px 0 rgba(255,255,255,0.3)', flex: '0 0 auto' }}>S</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg,#FF8A3D,#EA5E14)', color: '#FFF7F0', fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 14, boxShadow: '0 6px 16px rgba(240,102,30,0.35), inset 0 1px 0 rgba(255,255,255,0.3)', flex: '0 0 auto' }}>{t.role[0]}</span>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 14 }}>Sara Khan</div>
-                    <div style={{ marginTop: 2, fontSize: 12, color: '#A29889' }}>Product Lead, SplitConvert</div>
+                    <div style={{ fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 14 }}>{t.role}</div>
                   </div>
                 </div>
               </div>
@@ -423,7 +461,7 @@ export default function Home() {
             {DESIGN_PICKS.map((d) => (
               <Link key={d.slug} data-proj="1" data-rv="1" to={`/designs/${d.slug}`} style={{ position: 'relative', border: '1px solid transparent', borderRadius: 22, overflow: 'hidden', padding: 12, boxSizing: 'border-box', boxShadow: '0 18px 50px rgba(0,0,0,0.42), 0 0 36px rgba(240,102,30,0.05), inset 0 1px 0 rgba(255,255,255,0.12)', color: '#F5F1EA' }}>
                 <div data-pmedia="1" style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 14, overflow: 'hidden', background: 'linear-gradient(160deg,#2C2620,#1C1815)' }}>
-                  <image-slot id={`show-${d.slug === 'parallax-scroll' ? 'parallax' : d.slug === '3d-rotation' ? 'rotation' : 'dashboard'}`} shape="rect" placeholder={`Drop the ${d.title} design preview here`}></image-slot>
+                  <image-slot id={`show-${d.slug === 'parallax-scroll' ? 'parallax' : d.slug === '3d-rotation' ? 'rotation' : 'dashboard'}`} src={findDesign(d.slug)?.image} shape="rect" placeholder="Paste image URL here"></image-slot>
                 </div>
                 <div style={{ padding: '16px 8px 8px' }}>
                   <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, letterSpacing: '0.22em', color: '#F0661E' }}>{d.cat}</div>
@@ -454,8 +492,8 @@ export default function Home() {
               <h2 data-rv="1" style={{ margin: 0, fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 'clamp(30px,3.8vw,52px)', lineHeight: 1.14, letterSpacing: '-0.02em', maxWidth: '18ch' }}>Have an awesome project idea? <span style={{ color: '#F0661E' }}>Let's discuss.</span></h2>
               <p data-rv="1" style={{ margin: '18px 0 0', maxWidth: '52ch', fontSize: 16, lineHeight: 1.7, color: '#A29889' }}>I'm currently open to freelance projects and full-time opportunities. Let's build something users love.</p>
               <div data-rv="1" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginTop: 32 }}>
-                <a href="mailto:asfabatoolansari21@gmail.com" style={{ display: 'inline-block', background: 'linear-gradient(135deg,#FF8A3D 0%,#EA5E14 48%,#C74208 100%)', color: '#FFF7F0', fontWeight: 600, fontSize: 15, borderRadius: 999, padding: '15px 32px', whiteSpace: 'nowrap', textShadow: '0 1px 2px rgba(0,0,0,0.25)', boxShadow: '0 10px 28px rgba(240,102,30,0.35), inset 0 1px 0 rgba(255,255,255,0.28)' }}>Send me an email →</a>
-                <a href="#" target="_blank" rel="noreferrer" style={{ display: 'inline-block', color: '#F5F1EA', fontWeight: 500, fontSize: 15, border: '1px solid rgba(255,255,255,0.16)', background: 'rgba(255,255,255,0.06)', borderRadius: 999, padding: '14px 30px', whiteSpace: 'nowrap', boxShadow: '0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08)' }}>Connect on LinkedIn</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=asfabatoolansari21@gmail.com" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', background: 'linear-gradient(135deg,#FF8A3D 0%,#EA5E14 48%,#C74208 100%)', color: '#FFF7F0', fontWeight: 600, fontSize: 15, borderRadius: 999, padding: '15px 32px', whiteSpace: 'nowrap', textShadow: '0 1px 2px rgba(0,0,0,0.25)', boxShadow: '0 10px 28px rgba(240,102,30,0.35), inset 0 1px 0 rgba(255,255,255,0.28)' }}>Send me an email →</a>
+                <a href="https://www.figma.com/proto/hPNcs8X2E1l0MjTf1GCYSL/Asfa-Resume?node-id=0-1&t=nbNOlV1Wodj2r5k5-1" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', color: '#F5F1EA', fontWeight: 500, fontSize: 15, border: '1px solid rgba(255,255,255,0.16)', background: 'rgba(255,255,255,0.06)', borderRadius: 999, padding: '14px 30px', whiteSpace: 'nowrap', boxShadow: '0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08)' }}>View Resume ↗</a>
               </div>
             </div>
           </div>

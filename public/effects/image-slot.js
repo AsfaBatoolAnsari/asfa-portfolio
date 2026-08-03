@@ -25,7 +25,7 @@
     '.empty svg{opacity:.45}' +
     '.empty .cap{max-width:90%;font-weight:500;letter-spacing:.01em}' +
     '.ring{position:absolute;inset:0;pointer-events:none;border:1.5px dashed rgba(255,255,255,.14)}' +
-    ':host([data-filled]) .ring{display:none}';
+    ':host([data-filled]) .ring,:host([data-filled]) .empty{display:none}';
 
   class ImageSlot extends HTMLElement {
     static get observedAttributes() {

@@ -31,7 +31,7 @@ export default function Designs() {
           {designs.map((d) => (
             <Link key={d.slug} data-proj="1" to={`/designs/${d.slug}`}>
               <div data-pmedia="1" style={sx('position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#2C2620,#1C1815)')}>
-                <image-slot id={`design-list-${d.slug}`} shape="rect" placeholder={`Drop the ${d.title} preview`}></image-slot>
+                <image-slot id={`design-list-${d.slug}`} src={d.image} shape="rect" placeholder="Paste image URL here"></image-slot>
               </div>
               <div style={sx('padding:16px 8px 8px')}>
                 <div style={sx("font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.22em;color:#F0661E")}>{d.category.toUpperCase()}</div>

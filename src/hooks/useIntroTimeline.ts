@@ -28,6 +28,7 @@ export function useIntroTimeline({ playIntro = true, introSpeed = 1.1 }: Options
   const obsRef = useRef<IntersectionObserver | null>(null);
   const skObsRef = useRef<IntersectionObserver | null>(null);
   const onScrollRef = useRef<(() => void) | null>(null);
+  const onResizeRef = useRef<(() => void) | null>(null);
   const svcCardsRef = useRef<HTMLElement[]>([]);
   const reducedMotionRef = useRef(false);
 
@@ -78,8 +79,15 @@ export function useIntroTimeline({ playIntro = true, introSpeed = 1.1 }: Options
       }
       const cards = svcCardsRef.current, n = cards.length;
       if (!n) return;
-      if (reducedMotionRef.current || innerWidth < 900) { cards.forEach((c) => { c.style.transform = ''; c.style.zIndex = ''; }); return; }
-      const vh = innerHeight, C = SVC_STACK;
+      if (reducedMotionRef.current) { cards.forEach((c) => { c.style.transform = ''; c.style.zIndex = ''; }); return; }
+      // Read the pinned viewport's own rendered height rather than assuming
+      // it equals innerHeight — on desktop #svcSticky is 100svh so this is
+      // identical to before, but on mobile it's shrunk to fit the card stack
+      // (see Home.css), and this keeps the "cards fully settle" moment and
+      // the sticky's own natural release point perfectly in sync regardless
+      // of that height, instead of leaving a dead scroll gap or a mismatch.
+      const stickyEl = $('svcSticky');
+      const vh = stickyEl ? stickyEl.offsetHeight : innerHeight, C = SVC_STACK;
       const docTop = (el: HTMLElement | null) => { let y = 0; let cur: HTMLElement | null = el; while (cur) { y += cur.offsetTop; cur = cur.offsetParent as HTMLElement | null; } return y; };
       const total = Math.max(1, sec.offsetHeight - vh);
       const p = Math.min(1, Math.max(0, (scrollY - docTop(sec)) / total));
@@ -141,6 +149,14 @@ export function useIntroTimeline({ playIntro = true, introSpeed = 1.1 }: Options
       onScrollRef.current = onScroll;
       addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+
+      // Without this, resizing the window across the 900px services
+      // breakpoint (no accompanying scroll) leaves the last scroll-computed
+      // transform/scale stuck on the cards after CSS drops them back to
+      // position:static, visibly misplacing them in the mobile stacked list.
+      const onResize = () => updateStack();
+      onResizeRef.current = onResize;
+      addEventListener('resize', onResize);
 
       const els = document.querySelectorAll<HTMLElement>('[data-rv]');
       const anim = !reducedMotionRef.current;
@@ -344,6 +360,7 @@ export function useIntroTimeline({ playIntro = true, introSpeed = 1.1 }: Options
       if (obsRef.current) obsRef.current.disconnect();
       if (skObsRef.current) skObsRef.current.disconnect();
       if (onScrollRef.current) removeEventListener('scroll', onScrollRef.current);
+      if (onResizeRef.current) removeEventListener('resize', onResizeRef.current);
       skipBtn?.removeEventListener('click', skipHandler);
       document.documentElement.style.overflow = '';
     };

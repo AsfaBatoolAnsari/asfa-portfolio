@@ -26,15 +26,15 @@ export default function Contact() {
         </p>
 
         <div id="quickRow" style={sx('margin-top:clamp(36px,5vw,52px)')}>
-          <Hoverable as="a" data-up="1" href="tel:03153131393" className="glass" base="display:block;padding:22px" hoverCss="color:#F5F1EA">
+          <Hoverable as="a" data-up="1" href="https://wa.me/923193131393" className="glass" base="display:block;padding:22px" hoverCss="color:#F5F1EA">
             <span style={sx('display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,rgba(255,138,64,0.95),rgba(199,66,8,0.95));border:1px solid rgba(255,255,255,0.22);box-shadow:0 8px 22px rgba(240,102,30,0.32),inset 0 1px 0 rgba(255,255,255,0.3);color:#FFF7F0')}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 5c0 8.28 6.72 15 15 15l1.5-3.5-4-1.5-1.8 1.8a12 12 0 0 1-5.5-5.5l1.8-1.8-1.5-4L6 4C4.9 4 4 4.9 4 5Z"></path></svg>
             </span>
             <div style={sx("margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.18em;color:#8B8172")}>CALL ME</div>
-            <div style={sx('margin-top:7px;font-size:15px;font-weight:500;color:#F5F1EA;word-break:break-word')}>031-53131393</div>
+            <div style={sx('margin-top:7px;font-size:15px;font-weight:500;color:#F5F1EA;word-break:break-word')}>031-93131393</div>
             <div style={sx("margin-top:14px;font-size:13px;font-weight:500;color:#F0661E")}>Give me a call →</div>
           </Hoverable>
-          <Hoverable as="a" data-up="1" href="mailto:asfabatoolansari21@gmail.com" className="glass" base="display:block;padding:22px" hoverCss="color:#F5F1EA">
+          <Hoverable as="a" data-up="1" href="https://mail.google.com/mail/?view=cm&fs=1&to=asfabatoolansari21@gmail.com" className="glass" base="display:block;padding:22px" hoverCss="color:#F5F1EA">
             <span style={sx('display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,rgba(255,138,64,0.95),rgba(199,66,8,0.95));border:1px solid rgba(255,255,255,0.22);box-shadow:0 8px 22px rgba(240,102,30,0.32),inset 0 1px 0 rgba(255,255,255,0.3);color:#FFF7F0')}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="m4 7 8 6 8-6"></path></svg>
             </span>
@@ -111,7 +111,7 @@ export default function Contact() {
             <p style={sx('margin:10px 0 0;font-size:14px;line-height:1.6;color:#A29889')}>Reach out on WhatsApp and let's start the conversation — I'll get back to you within a day.</p>
             <Hoverable
               as="a"
-              href="https://wa.me/923153131393"
+              href="https://wa.me/923193131393"
               target="_blank"
               rel="noreferrer"
               base="display:flex;align-items:center;gap:14px;margin-top:22px;background:linear-gradient(135deg,#FF8A3D,#EA5E14 48%,#C74208);color:#FFF7F0;border-radius:16px;padding:16px 20px;box-shadow:0 12px 30px rgba(240,102,30,0.32),inset 0 1px 0 rgba(255,255,255,0.28)"

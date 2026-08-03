@@ -11,8 +11,24 @@
   #pdByline { gap: 16px 28px; }
 }
 #pdHero { position: relative; margin-top: 34px; }
-#pdHero .glow { position: absolute; inset: -8% -4% -14%; background: radial-gradient(58% 58% at 50% 38%,rgba(240,102,30,0.22),transparent 70%); filter: blur(54px); pointer-events: none; }
+#pdHero .glow { position: absolute; inset: -8% -4% -14%; background: radial-gradient(58% 58% at 50% 38%,rgba(240,102,30,0.22),transparent 70%); filter: blur(54px); pointer-events: none; animation: ndaGlowPulse 6s ease-in-out infinite; }
 #pdHero .frame { position: relative; aspect-ratio: 16/9; border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); background: linear-gradient(160deg,#2C2620,#1C1815); box-shadow: 0 40px 90px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08); }
+.nda-shimmer { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 42%, rgba(255,255,255,0.07) 50%, transparent 58%); background-size: 260% 260%; animation: ndaShimmer 7s ease-in-out infinite; pointer-events: none; }
+.nda-dots { position: absolute; inset: 0; opacity: 0.5; background-image: radial-gradient(rgba(240,102,30,0.18) 1px, transparent 1px); background-size: 22px 22px; -webkit-mask-image: radial-gradient(60% 60% at 50% 42%, #000 0%, transparent 75%); mask-image: radial-gradient(60% 60% at 50% 42%, #000 0%, transparent 75%); pointer-events: none; }
+.nda-lockWrap { position: relative; }
+.nda-ring { position: absolute; left: 50%; top: 50%; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 19px; border: 1px solid rgba(240,102,30,0.55); opacity: 0; animation: ndaRingPulse 2.8s ease-out infinite; pointer-events: none; }
+.nda-ring.r2 { animation-delay: 1.4s; }
+.nda-corner { position: absolute; width: 20px; height: 20px; border-color: rgba(240,102,30,0.4); pointer-events: none; }
+.nda-corner.tl { top: 16px; left: 16px; border-top: 1.5px solid; border-left: 1.5px solid; border-top-left-radius: 6px; }
+.nda-corner.tr { top: 16px; right: 16px; border-top: 1.5px solid; border-right: 1.5px solid; border-top-right-radius: 6px; }
+.nda-corner.bl { bottom: 16px; left: 16px; border-bottom: 1.5px solid; border-left: 1.5px solid; border-bottom-left-radius: 6px; }
+.nda-corner.br { bottom: 16px; right: 16px; border-bottom: 1.5px solid; border-right: 1.5px solid; border-bottom-right-radius: 6px; }
+@keyframes ndaGlowPulse { 0%, 100% { opacity: 0.75; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+@keyframes ndaShimmer { 0% { background-position: 220% 0; } 100% { background-position: -40% 0; } }
+@keyframes ndaRingPulse { 0% { transform: scale(1); opacity: 0.55; } 100% { transform: scale(2.1); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  #pdHero .glow, .nda-shimmer, .nda-ring { animation: none; }
+}
 #caseGrid { display: grid; grid-template-columns: minmax(0,0.8fr) minmax(0,1.2fr); gap: clamp(30px,5vw,68px); align-items: start; margin-top: clamp(48px,7vw,82px); }
 @media (max-width: 859px) {
   #caseGrid { grid-template-columns: minmax(0,1fr); gap: 34px; }

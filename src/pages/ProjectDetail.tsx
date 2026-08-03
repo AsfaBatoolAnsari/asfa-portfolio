@@ -48,13 +48,13 @@ export default function ProjectDetail() {
             </div>
             <div data-up="1" id="pdHero">
               <div className="glow" aria-hidden="true"></div>
-              <div className="frame"><image-slot id={`pd-hero-${p.slug}`} shape="rect" placeholder={`Drop the ${p.title} hero image`}></image-slot></div>
+              <div className="frame"><image-slot id={`pd-hero-${p.slug}`} src={p.hero || p.image} shape="rect" placeholder="Paste image URL here"></image-slot></div>
             </div>
             <div id="caseGrid">
               <aside id="caseAside" data-up="1">
                 <div className="pd-kicker">CASE STUDY</div>
                 <h2 style={{ ...sx("margin:12px 0 0;font-family:'Sora',sans-serif;font-weight:600;line-height:1.12;letter-spacing:-0.02em"), fontSize: 'clamp(23px,2.8vw,31px)' }}>The story behind the design.</h2>
-                <p style={sx('margin:14px 0 0;font-size:14.5px;line-height:1.7;color:#A29889')}>A short walkthrough of the thinking behind {p.title} — from the core problem through to the shipped solution.</p>
+                <p style={sx('margin:14px 0 0;font-size:14.5px;line-height:1.7;color:#A29889')}>{p.caseIntro || `A short walkthrough of the thinking behind ${p.title} — from the core problem through to the shipped solution.`}</p>
                 <div style={sx("margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#F0661E")}>TOOLKIT</div>
                 <div style={sx('display:flex;flex-wrap:wrap;gap:9px;margin-top:14px')}>
                   {(p.tools || []).map((t) => (
@@ -70,8 +70,8 @@ export default function ProjectDetail() {
               </div>
             </div>
             <div id="pdGal" data-up="1">
-              {(p.gallery || []).map((g) => (
-                <div key={g} className="gal-cell"><image-slot id={`pd-${p.slug}-${g}`} shape="rect" placeholder="Gallery image"></image-slot></div>
+              {(p.gallery || []).map((g, i) => (
+                <div key={g} className="gal-cell"><image-slot id={`pd-${p.slug}-${i}`} src={g} shape="rect" placeholder="Paste image URL here"></image-slot></div>
               ))}
             </div>
           </>
@@ -79,7 +79,7 @@ export default function ProjectDetail() {
 
         {p && p.type === 'nda' && (
           <>
-            <div data-up="1" style={sx("display:inline-flex;align-items:center;gap:8px;margin-top:26px;border:1px solid rgba(240,102,30,0.45);background:rgba(240,102,30,0.12);border-radius:999px;padding:7px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#F0661E")}>
+            <div data-up="1" style={sx("display:inline-flex;align-items:center;gap:8px;margin:26px 0 0 16px;border:1px solid rgba(240,102,30,0.45);background:rgba(240,102,30,0.12);border-radius:999px;padding:7px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#F0661E")}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
               CONFIDENTIAL · NDA
             </div>
@@ -97,18 +97,28 @@ export default function ProjectDetail() {
             <div data-up="1" id="pdHero">
               <div className="glow" aria-hidden="true"></div>
               <div className="frame" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: 16, padding: '40px 24px' }}>
-                <span style={sx('width:66px;height:66px;border-radius:19px;display:flex;align-items:center;justify-content:center;background:rgba(240,102,30,0.12);border:1px solid rgba(240,102,30,0.4);color:#F0661E')}>
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
-                </span>
-                <div style={{ fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 'clamp(18px,2.4vw,24px)', letterSpacing: '-0.01em' }}>Visuals protected under NDA</div>
-                <p style={{ margin: 0, maxWidth: '46ch', fontSize: 14, lineHeight: 1.6, color: '#A29889' }}>The full case study and screens can be shared privately during an interview or portfolio review.</p>
+                <div className="nda-dots" aria-hidden="true"></div>
+                <div className="nda-shimmer" aria-hidden="true"></div>
+                <div className="nda-corner tl" aria-hidden="true"></div>
+                <div className="nda-corner tr" aria-hidden="true"></div>
+                <div className="nda-corner bl" aria-hidden="true"></div>
+                <div className="nda-corner br" aria-hidden="true"></div>
+                <div className="nda-lockWrap">
+                  <div className="nda-ring" aria-hidden="true"></div>
+                  <div className="nda-ring r2" aria-hidden="true"></div>
+                  <span style={sx('position:relative;width:66px;height:66px;border-radius:19px;display:flex;align-items:center;justify-content:center;background:rgba(240,102,30,0.12);border:1px solid rgba(240,102,30,0.4);color:#F0661E')}>
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+                  </span>
+                </div>
+                <div style={{ position: 'relative', fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 'clamp(18px,2.4vw,24px)', letterSpacing: '-0.01em' }}>Visuals protected under NDA</div>
+                <p style={{ position: 'relative', margin: 0, maxWidth: '46ch', fontSize: 14, lineHeight: 1.6, color: '#A29889' }}>The full case study and screens can be shared privately during an interview or portfolio review.</p>
               </div>
             </div>
             <div id="caseGrid">
               <aside id="caseAside" data-up="1">
                 <div className="pd-kicker">CONFIDENTIAL</div>
                 <h2 style={{ ...sx("margin:12px 0 0;font-family:'Sora',sans-serif;font-weight:600;line-height:1.12;letter-spacing:-0.02em"), fontSize: 'clamp(23px,2.8vw,31px)' }}>A look under the hood.</h2>
-                <p style={sx('margin:14px 0 0;font-size:14.5px;line-height:1.7;color:#A29889')}>What I can share about {p.title} — the objective, my role and how the work came together, without breaking confidentiality.</p>
+                <p style={sx('margin:14px 0 0;font-size:14.5px;line-height:1.7;color:#A29889')}>{p.caseIntro || `What I can share about ${p.title} — the objective, my role and how the work came together, without breaking confidentiality.`}</p>
                 <div style={sx("margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#F0661E")}>TOOLKIT</div>
                 <div style={sx('display:flex;flex-wrap:wrap;gap:9px;margin-top:14px')}>
                   {(p.tools || []).map((t) => (
@@ -145,7 +155,7 @@ export default function ProjectDetail() {
                   <div style={sx('margin-top:3px;font-size:13px;color:#A29889')}>Full visuals are available privately on request.</div>
                 </div>
               </div>
-              <Hoverable as={Link} to="/contact" base="display:inline-flex;align-items:center;gap:9px;background:#F0661E;color:#12100E;font-weight:600;font-size:14px;border-radius:999px;padding:12px 22px;white-space:nowrap" hoverCss="background:#FF7A2E;color:#12100E">
+              <Hoverable as={Link} to="/contact" base="display:inline-flex;align-items:center;gap:9px;background:#F0661E;color:#FFF7F0;font-weight:600;font-size:14px;border-radius:999px;padding:12px 22px;white-space:nowrap" hoverCss="background:#FF7A2E;color:#FFF7F0">
                 Request access<span aria-hidden="true">→</span>
               </Hoverable>
             </div>
