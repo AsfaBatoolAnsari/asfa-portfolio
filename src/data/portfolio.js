@@ -51,7 +51,7 @@ export const projects = [
     outcome: 'A more accessible, dependable portal that reduces confusion around results and document access.',
     tools: ['UX Research', 'User Flows', 'Information Architecture', 'Wireframing', 'UI Design', 'Prototype', 'Design System', 'Figma'],
     image: '/assets/projects/bsek-education-portal.jpg',
-    gallery: ['/assets/projects/bsek-education-portal/1.jpg', '/assets/projects/bsek-education-portal/2.jpg', '/assets/projects/bsek-education-portal/3.jpg'],
+    gallery: ['/assets/projects/images/bsek_img1.png', '/assets/projects/images/bsek_img2.png', '/assets/projects/images/bsek_img3.png'],
   },
   {
     slug: 'car-parking',
@@ -71,9 +71,9 @@ export const projects = [
     tools: ['UX Research', 'User Flows', 'Wireframing', 'UI Design', 'Prototyping', 'Design System', 'Figma'],
     image: '/assets/projects/car-parking.jpg',
     hero: '/assets/projects/car-parking-hero.jpg',
-    gallery: ['/assets/projects/car-parking/1.jpg', '/assets/projects/car-parking/2.jpg', '/assets/projects/car-parking/3.jpg'],
+    gallery: ['/assets/projects/images/car_parking1.png', '/assets/projects/images/car_parking2.png', '/assets/projects/images/car_parking3.png'],
   },
-  {
+  
     slug: 'portfolio-website',
     type: 'public',
     title: 'Portfolio Website',
@@ -90,7 +90,7 @@ export const projects = [
     outcome: 'A professional online presence that makes it easy for visitors to explore work and get in touch.',
     tools: ['UI Design', 'Responsive Design', 'Wireframing', 'Prototyping', 'Design System', 'Glassmorphism', 'Figma'],
     image: '/assets/projects/portfolio-website.jpg',
-    gallery: ['/assets/projects/portfolio-website/1.jpg', '/assets/projects/portfolio-website/2.jpg', '/assets/projects/portfolio-website/3.jpg'],
+    gallery: ['/assets/projects/images/portfolio_img1.png', '/assets/projects/images/portfolio_img2.png', '/assets/projects/images/portfolio_img3.png'],
   },
   {
     slug: '365-taskers',
@@ -110,7 +110,7 @@ export const projects = [
     tools: ['UX Research', 'User Flows', 'Information Architecture', 'Wireframing', 'UI Design', 'Dashboard Design', 'Design System', 'Prototyping', 'Figma'],
     image: '/assets/projects/365-taskers.jpg',
     hero: '/assets/projects/365-taskers-hero.jpg',
-    gallery: ['/assets/projects/365-taskers/1.jpg', '/assets/projects/365-taskers/2.jpg', '/assets/projects/365-taskers/3.jpg'],
+    gallery: ['/assets/projects/images/365-taskers3.png', '/assets/projects/images/365-taskers2.png', '/assets/projects/images/365-taskers1.png'],
   },
   {
     slug: 'donatefy',
