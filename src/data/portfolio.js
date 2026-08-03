@@ -110,7 +110,7 @@ export const projects = [
     tools: ['UX Research', 'User Flows', 'Information Architecture', 'Wireframing', 'UI Design', 'Dashboard Design', 'Design System', 'Prototyping', 'Figma'],
     image: '/assets/projects/365-taskers.jpg',
     hero: '/assets/projects/365-taskers-hero.jpg',
-    gallery: ['/assets/projects/images/365-taskers3.png', '/assets/projects/images/365-taskers2.png', '/assets/projects/images/365-taskers1.png'],
+    gallery: ['/assets/projects/images/365tasker_img3.png', '/assets/projects/images/365tasker_img2.png', '/assets/projects/images/365tasker_img1.png'],
   },
   {
     slug: 'donatefy',
