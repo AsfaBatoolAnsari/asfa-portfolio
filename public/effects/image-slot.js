@@ -37,7 +37,7 @@
       root.innerHTML =
         '<style>' + stylesheet + '</style>' +
         '<div class="frame" part="frame">' +
-        '  <img part="image" alt="" loading="lazy" decoding="async">' +
+        '  <img part="image" alt="">' +
         '  <div class="empty" part="empty">' + icon + '<div class="cap"></div></div>' +
         '  <div class="ring" part="ring"></div>' +
         '</div>';
