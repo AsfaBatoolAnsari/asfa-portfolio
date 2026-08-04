@@ -183,7 +183,7 @@ export default function Home() {
                     <span style={{ position: 'absolute', left: '50%', top: -3.5, width: 7, height: 7, marginLeft: -3.5, borderRadius: '50%', background: '#F0661E', boxShadow: '0 0 10px rgba(240,102,30,0.9)' }} />
                   </div>
                   <div style={{ position: 'relative', aspectRatio: '1', borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.14)', background: 'rgba(255,255,255,0.04)', boxShadow: '0 24px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.1)' }}>
-                    <image-slot id="portrait" src="/assets/about-portrait.jpg" shape="rect" style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '132%' }} placeholder="Paste image URL here"></image-slot>
+                    <image-slot id="portrait" src="/assets/about-portrait.png" shape="rect" style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '132%' }} placeholder="Paste image URL here"></image-slot>
                   </div>
                 </div>
                 <div id="v2right" data-rv="1" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
