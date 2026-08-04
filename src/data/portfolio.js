@@ -32,7 +32,7 @@ export const projects = [
     outcome: 'A more confident, enjoyable gifting experience that blends personalization and quality into a single streamlined mobile journey.',
     tools: ['UX Research', 'User Flows', 'Wireframing', 'UI Design', 'Design System', 'Prototyping', 'Figma'],
     image: '/assets/projects/happy-present.jpg',
-    gallery: ['/assets/projects/images/happy_present_img1.png', '/assets/projects/images/happy_present_img2.png', '/assets/projects/images/happy_present_img3.png'],
+    gallery: ['/assets/projects/images/happy_present_img1.webp', '/assets/projects/images/happy_present_img2.webp', '/assets/projects/images/happy_present_img3.webp'],
   },
   {
     slug: 'bsek-education-portal',
@@ -51,7 +51,7 @@ export const projects = [
     outcome: 'A more accessible, dependable portal that reduces confusion around results and document access.',
     tools: ['UX Research', 'User Flows', 'Information Architecture', 'Wireframing', 'UI Design', 'Prototype', 'Design System', 'Figma'],
     image: '/assets/projects/bsek-education-portal.jpg',
-    gallery: ['/assets/projects/images/bsek_img1.png', '/assets/projects/images/bsek_img2.png', '/assets/projects/images/bsek_img3.png'],
+    gallery: ['/assets/projects/images/bsek_img1.webp', '/assets/projects/images/bsek_img2.webp', '/assets/projects/images/bsek_img3.webp'],
   },
   {
     slug: 'car-parking',
@@ -71,7 +71,7 @@ export const projects = [
     tools: ['UX Research', 'User Flows', 'Wireframing', 'UI Design', 'Prototyping', 'Design System', 'Figma'],
     image: '/assets/projects/car-parking.jpg',
     hero: '/assets/projects/car-parking-hero.jpg',
-    gallery: ['/assets/projects/images/car_parking1.png', '/assets/projects/images/car_parking2.png', '/assets/projects/images/car_parking3.png'],
+    gallery: ['/assets/projects/images/car_parking1.webp', '/assets/projects/images/car_parking2.webp', '/assets/projects/images/car_parking3.webp'],
   },
   {
     slug: 'portfolio-website',
@@ -90,7 +90,7 @@ export const projects = [
     outcome: 'A professional online presence that makes it easy for visitors to explore work and get in touch.',
     tools: ['UI Design', 'Responsive Design', 'Wireframing', 'Prototyping', 'Design System', 'Glassmorphism', 'Figma'],
     image: '/assets/projects/portfolio-website.jpg',
-    gallery: ['/assets/projects/images/portfolio_img1.png', '/assets/projects/images/portfolio_img2.png', '/assets/projects/images/portfolio_img3.png'],
+    gallery: ['/assets/projects/images/portfolio_img1.webp', '/assets/projects/images/portfolio_img2.webp', '/assets/projects/images/portfolio_img3.webp'],
   },
   {
     slug: '365-taskers',
@@ -110,7 +110,7 @@ export const projects = [
     tools: ['UX Research', 'User Flows', 'Information Architecture', 'Wireframing', 'UI Design', 'Dashboard Design', 'Design System', 'Prototyping', 'Figma'],
     image: '/assets/projects/365-taskers.jpg',
     hero: '/assets/projects/365-taskers-hero.jpg',
-    gallery: ['/assets/projects/images/365tasker_img3.png', '/assets/projects/images/365tasker_img2.png', '/assets/projects/images/365tasker_img1.png'],
+    gallery: ['/assets/projects/images/365tasker_img3.webp', '/assets/projects/images/365tasker_img2.webp', '/assets/projects/images/365tasker_img1.webp'],
   },
   {
     slug: 'donatefy',
