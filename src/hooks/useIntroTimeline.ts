@@ -226,8 +226,8 @@ export function useIntroTimeline({ playIntro = true, introSpeed = 1.1 }: Options
       const s = m ? 0.7 : 0.62, k = 1 / s, cy = m ? 0.44 : 0.46;
       const W = s * vw, H = s * vh, x0 = (0.5 - s / 2) * vw, y0 = (cy - s / 2) * vh;
       const fw = $('fw'), inner = $('inner'), chrome = $('chrome');
-      gsap.set(fw, { left: x0, top: y0, right: 'auto', bottom: 'auto', width: 0, height: 0, borderRadius: 12, backgroundColor: '#131110', boxShadow: '0 30px 90px rgba(0,0,0,0.55)' });
-      gsap.set(chrome, { left: x0, top: y0, right: 'auto', bottom: 'auto', width: 0, height: 0, borderColor: '#F0661E' });
+      gsap.set(fw, { left: x0, top: y0, right: 'auto', bottom: 'auto', width: 0, height: 0, borderRadius: 12, backgroundColor: '#131110', boxShadow: '0 30px 90px rgba(0,0,0,0.55)', willChange: 'left,top,width,height,transform' });
+      gsap.set(chrome, { left: x0, top: y0, right: 'auto', bottom: 'auto', width: 0, height: 0, borderColor: '#F0661E', willChange: 'left,top,width,height' });
       gsap.set(inner, { width: vw, height: vh, scale: s });
       gsap.set('#frameTag', { opacity: 0 });
 
