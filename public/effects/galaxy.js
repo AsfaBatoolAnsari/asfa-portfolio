@@ -139,7 +139,7 @@ void main() {
         this.style.position = 'absolute'; this.style.inset = '0'; this.style.display = 'block'; this.style.pointerEvents = 'none';
         const starSpeed = num('star-speed', 0.5), speed = num('speed', 1) * (mob ? 0.8 : 1);
         const mouseInteraction = !mob && !rm && this.getAttribute('mouse') !== 'off';
-        const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
+        const renderer = new Renderer({ alpha: true, premultipliedAlpha: false, dpr: Math.min(devicePixelRatio || 1, 1.5) });
         const gl = this._gl = renderer.gl;
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
