@@ -263,8 +263,8 @@ export function useIntroTimeline({ playIntro = true, introSpeed = 1.1 }: Options
       setMP();
       tl.set('#lg', { opacity: 1 }, 0)
         .fromTo('#lgPen', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: 'power2.out' }, 0.15)
-        .to(mp, { p: 0, duration: 0.95, ease: 'power2.inOut', onUpdate: setMP }, 0.15)
-        .to('#lgPen', { opacity: 0, scale: 0.5, duration: 0.28, ease: 'power2.in' }, 1.02)
+        .to(mp, { p: 0, duration: 1.3, ease: 'power2.inOut', onUpdate: setMP }, 0.15)
+        .to('#lgPen', { opacity: 0, scale: 0.5, duration: 0.28, ease: 'power2.in' }, 1.37)
         .to('#lgGlow', { opacity: 1, duration: 0.8, ease: 'sine.inOut' }, 0.4)
         .to('#skipBtn', { opacity: 1, duration: 0.4 }, 0.8)
         .to('#lg', { opacity: 0, filter: 'blur(4px)', duration: 0.45, ease: 'power2.in' }, 1.55)
