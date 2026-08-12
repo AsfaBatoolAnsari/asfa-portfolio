@@ -135,16 +135,27 @@ export function useIntroTimeline({ playIntro = true, introSpeed = 1.1 }: Options
       document.documentElement.style.overflow = '';
 
       svcCardsRef.current = Array.from(document.querySelectorAll<HTMLElement>('[data-svc-card]'));
+      // rAF-throttled: the browser can fire many 'scroll' events per rendered frame
+      // (especially on trackpads), and each run below forces a layout read
+      // (getBoundingClientRect / offsetTop). Coalescing to one run per frame keeps
+      // the work identical but stops it from repeating far more often than the
+      // screen can even show, which is what was making scroll feel stuck.
+      let scrollQueued = false;
       const onScroll = () => {
-        const pn = $('pageNav'); if (!pn) return;
-        pn.dataset.scrolled = scrollY > 24 ? '1' : '0';
-        let cur = 'hero';
-        ['hero', 'about', 'services', 'projects', 'designs', 'contact'].forEach((s) => {
-          const el = $(s);
-          if (el && el.getBoundingClientRect().top <= innerHeight * 0.4) cur = s;
+        if (scrollQueued) return;
+        scrollQueued = true;
+        requestAnimationFrame(() => {
+          scrollQueued = false;
+          const pn = $('pageNav'); if (!pn) return;
+          pn.dataset.scrolled = scrollY > 24 ? '1' : '0';
+          let cur = 'hero';
+          ['hero', 'about', 'services', 'projects', 'designs', 'contact'].forEach((s) => {
+            const el = $(s);
+            if (el && el.getBoundingClientRect().top <= innerHeight * 0.4) cur = s;
+          });
+          pn.querySelectorAll<HTMLElement>('[data-sec]').forEach((a) => { a.style.color = a.dataset.sec === cur ? '#F0661E' : '#A29889'; });
+          updateStack();
         });
-        pn.querySelectorAll<HTMLElement>('[data-sec]').forEach((a) => { a.style.color = a.dataset.sec === cur ? '#F0661E' : '#A29889'; });
-        updateStack();
       };
       onScrollRef.current = onScroll;
       addEventListener('scroll', onScroll, { passive: true });
