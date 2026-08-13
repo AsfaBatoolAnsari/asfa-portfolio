@@ -485,7 +485,7 @@ export default function Home() {
         <section id="cta" style={{ position: 'relative', overflow: 'hidden', padding: 'clamp(40px,6vh,80px) clamp(16px,4vw,32px) clamp(14px,2.5vh,32px)', boxSizing: 'border-box' }}>
           <div style={{ position: 'relative' }}>
             <div aria-hidden="true" style={{ position: 'absolute', inset: '-30% -20%', pointerEvents: 'none' }}>
-              <galaxy-bg density="1.1" hue-shift="25" saturation="0.4" glow-intensity="0.25" twinkle-intensity="0.35" rotation-speed="0.05" repulsion-strength="2.5" star-speed="0.5" speed="0.8"></galaxy-bg>
+              <div className="css-stars" aria-hidden="true"></div>
             </div>
             <div aria-hidden="true" style={{ position: 'absolute', left: '50%', bottom: '-46%', transform: 'translateX(-50%)', width: '76%', height: '80%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(240,102,30,0.14), transparent 62%)', filter: 'blur(46px)', pointerEvents: 'none' }} />
             <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: 'clamp(56px,9vw,104px) clamp(24px,5vw,72px)' }}>
