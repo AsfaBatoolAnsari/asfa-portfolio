@@ -60,7 +60,13 @@ export function Starfield({
     const startTime = Date.now();
     let currentTime = 0;
     let raf = 0;
-    let visible = true;
+    // Start assumed off-screen: IntersectionObserver's first callback is async and
+    // won't land for a frame or two, and this section sits well below the fold —
+    // starting "true" meant the canvas did full render work during those first
+    // frames, competing with the hero's intro timeline for the main thread and
+    // making it feel choppy. Starting "false" means it stays idle until the
+    // observer actually confirms the section is in view.
+    let visible = false;
 
     const setSize = () => {
       // clientWidth/Height can briefly be 0 before layout settles (e.g. on first
