@@ -4,9 +4,7 @@
    Static left-to-right brightness falloff is baked into each square's base opacity.
    No canvas/WebGL/JS animation loop, so it stays cheap regardless of grid size,
    and the SVG viewBox scaling makes it responsive by construction. */
-#cta .css-stars { position: absolute; inset: 0; overflow: hidden; }
-@media (prefers-reduced-motion: reduce) {
-  #cta .css-stars animate { display: none; }
+
 }
 #btnG, #hnCta, #pnCta { background: rgba(255,255,255,0.05); }
 #v1grid { display: grid; grid-template-columns: minmax(0,0.92fr) minmax(0,1.08fr); gap: clamp(32px,5vw,60px); align-items: center; margin-top: clamp(36px,5vw,54px); }
@@ -117,7 +115,7 @@
 @media (max-width: 679px) {
   #tstGrid { grid-template-columns: minmax(0,1fr); }
 }
-[data-tst] { position: relative; border: 1px solid transparent; border-radius: 22px; overflow: hidden; background: linear-gradient(160deg,rgba(52,43,36,0.9) 0%,rgba(34,29,24,0.92) 50%,rgba(27,23,19,0.94) 100%); box-shadow: 0 18px 50px rgba(0,0,0,0.42), 0 0 36px rgba(240,102,30,0.05), inset 0 1px 0 rgba(255,255,255,0.12); transition: transform .35s cubic-bezier(.2,.7,.25,1), box-shadow .35s ease, filter .35s ease; }
+[data-tst] { position: relative; display: flex; flex-direction: column; border: 1px solid transparent; border-radius: 22px; overflow: hidden; background: linear-gradient(160deg,rgba(52,43,36,0.9) 0%,rgba(34,29,24,0.92) 50%,rgba(27,23,19,0.94) 100%); box-shadow: 0 18px 50px rgba(0,0,0,0.42), 0 0 36px rgba(240,102,30,0.05), inset 0 1px 0 rgba(255,255,255,0.12); transition: transform .35s cubic-bezier(.2,.7,.25,1), box-shadow .35s ease, filter .35s ease; }
 @supports ((-webkit-backdrop-filter: blur(4px)) or (backdrop-filter: blur(4px))) {
   [data-tst] { background: linear-gradient(160deg,rgba(58,48,39,0.66) 0%,rgba(36,30,25,0.64) 50%,rgba(28,23,19,0.68) 100%); -webkit-backdrop-filter: blur(18px) saturate(1.25); backdrop-filter: blur(18px) saturate(1.25); }
 }
