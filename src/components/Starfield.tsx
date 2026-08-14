@@ -63,8 +63,12 @@ export function Starfield({
     let visible = true;
 
     const setSize = () => {
-      size.x = container.clientWidth;
-      size.y = container.clientHeight;
+      // clientWidth/Height can briefly be 0 before layout settles (e.g. on first
+      // mount, or while an ancestor's percentage-based size is still resolving) —
+      // createImageData throws IndexSizeError on a 0 dimension, so guard against it.
+      // ResizeObserver below re-runs this once the container actually has a size.
+      size.x = Math.max(1, container.clientWidth);
+      size.y = Math.max(1, container.clientHeight);
       canvas.width = size.x;
       canvas.height = size.y;
       imagedata = context.createImageData(size.x, size.y);
