@@ -43,7 +43,7 @@ export function Footer() {
             <p style={sx('margin:12px 0 0;max-width:38ch;font-size:14.5px;line-height:1.7;color:#A29889')}>
               Thank you for visiting my portfolio. I'm dedicated to crafting seamless digital experiences that captivate and engage. Let's turn your ideas into reality.
             </p>
-            <div style={sx('display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin-top:22px;max-width:396px')}>
+            <div style={sx('display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px;margin-top:22px;max-width:440px')}>
               <Hoverable as="a" href="https://www.linkedin.com/in/asfa-batool-ansari/" target="_blank" rel="noreferrer" aria-label="LinkedIn" base={socialIconStyle} hoverCss={socialIconHover}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 9h4v12H3V9Zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9V9Z"></path></svg>
               </Hoverable>
@@ -71,6 +71,9 @@ export function Footer() {
               <Hoverable as="a" href="https://youtube.com/@asfabatoolansari9021?si=GuXb2jPOcEnYEqP4" target="_blank" rel="noreferrer" aria-label="YouTube" base={socialIconStyle} hoverCss={socialIconHover}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 12s0-3.8-.5-5.6a2.9 2.9 0 0 0-2-2C18.7 4 12 4 12 4s-6.7 0-8.5.4a2.9 2.9 0 0 0-2 2C1 8.2 1 12 1 12s0 3.8.5 5.6a2.9 2.9 0 0 0 2 2C5.3 20 12 20 12 20s6.7 0 8.5-.4a2.9 2.9 0 0 0 2-2C23 15.8 23 12 23 12ZM10 15.5v-7l6 3.5-6 3.5Z"></path></svg>
               </Hoverable>
+              <Hoverable as="a" href="https://www.fiverr.com/s/kXxA7Ng" target="_blank" rel="noreferrer" aria-label="Fiverr" base={socialIconStyle} hoverCss={socialIconHover}>
+                <span style={sx("font-family:'Sora',sans-serif;font-weight:700;font-size:12px;line-height:1")}>Fi</span>
+              </Hoverable>
             </div>
           </div>
           <div style={sx('min-width:0')}>
@@ -79,7 +82,8 @@ export function Footer() {
               <Hoverable as={Link} to="/" base="color:#C9C0B4" hoverCss="color:#F0661E">Home</Hoverable>
               <Hoverable as={Link} to="/#about" base="color:#C9C0B4" hoverCss="color:#F0661E">About me</Hoverable>
               <Hoverable as={Link} to="/#services" base="color:#C9C0B4" hoverCss="color:#F0661E">Service</Hoverable>
-              <Hoverable as={Link} to="/projects" base="color:#C9C0B4" hoverCss="color:#F0661E">Project</Hoverable>
+              <Hoverable as={Link} to="/projects" base="color:#C9C0B4" hoverCss="color:#F0661E">UI/UX</Hoverable>
+              <Hoverable as={Link} to="/vibe-code" base="color:#C9C0B4" hoverCss="color:#F0661E">Vibe Code</Hoverable>
               <Hoverable as={Link} to="/designs" base="color:#C9C0B4" hoverCss="color:#F0661E">Designs</Hoverable>
             </div>
           </div>

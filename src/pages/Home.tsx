@@ -12,19 +12,11 @@ import './Home.css';
 // Projects data for the home page's category-filtered grid — a separate, smaller
 // list than src/data/portfolio.ts, exactly as the original design authored it
 // (the full case-study data lives on the dedicated Projects/ProjectDetail pages).
-const PROJ_CATS = ['Mobile App', 'Web App', 'Website', 'Dashboard', 'Prototype'];
+const PROJ_CATS = ['UI/UX Design', 'Vibe Code'];
 const PROJECTS = [
-  { cats: ['Mobile App', 'Prototype'], title: 'Happy Present', slug: 'happy-present' },
-  { cats: ['Mobile App'], title: 'Car Parking', slug: 'car-parking' },
-  { cats: ['Mobile App', 'Prototype'], title: 'Donatefy Tap-to-Pay', slug: 'donatefy-tap-to-pay', nda: true },
-  { cats: ['Web App', 'Prototype'], title: 'BSEK Education Portal', slug: 'bsek-education-portal' },
-  { cats: ['Web App'], title: 'Donatefy eFund', slug: 'donatefy-efund', nda: true },
-  { cats: ['Web App', 'Dashboard'], title: 'Inwirement', slug: 'inwirement', nda: true },
-  { cats: ['Website'], title: 'Portfolio Website', slug: 'portfolio-website' },
-  { cats: ['Website'], title: 'Cybersecurity Awareness', slug: 'cybersecurity-awareness', nda: true },
-  { cats: ['Website'], title: 'Accurate Group', slug: 'accurate-group', nda: true },
-  { cats: ['Dashboard'], title: '365 Taskers', slug: '365-taskers' },
-  { cats: ['Dashboard'], title: 'Donatefy CRM', slug: 'donatefy-crm', nda: true },
+  { cats: ['UI/UX Design'], title: 'Happy Present', slug: 'happy-present' },
+  { cats: ['UI/UX Design'], title: 'Car Parking', slug: 'car-parking' },
+  { cats: ['UI/UX Design'], title: 'Donatefy Tap-to-Pay', slug: 'donatefy-tap-to-pay', nda: true },
 ];
 
 const SKILLS_LEFT = [
@@ -32,12 +24,18 @@ const SKILLS_LEFT = [
   { name: 'Photoshop', pct: 85 },
   { name: 'Illustrator', pct: 80 },
   { name: 'Prototyping', pct: 92 },
+  { name: 'VS Code', pct: 88 },
+  { name: 'Claude', pct: 95 },
+  { name: 'ChatGPT', pct: 92 },
 ];
 const SKILLS_RIGHT = [
   { name: 'Adobe XD', pct: 88 },
   { name: 'Canva', pct: 90 },
   { name: 'After Effects', pct: 70 },
   { name: 'HTML & CSS', pct: 72 },
+  { name: 'Gemini', pct: 88 },
+  { name: 'Lovable', pct: 90 },
+  { name: 'GitHub Copilot', pct: 89 },
 ];
 
 const SERVICES = [
@@ -47,6 +45,7 @@ const SERVICES = [
   { n: '04', title: 'Mobile App Design', desc: 'Designing intuitive mobile applications with user-friendly navigation, responsive layouts, and seamless experiences across Android and iOS.', tags: ['IOS', 'ANDROID', 'APP FLOWS', 'PROTOTYPING'], icon: <><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M10.5 18.5h3"></path></> },
   { n: '05', title: 'Branding & Creative', desc: 'Creating brand assets, brochures, social media creatives, and marketing materials that maintain a consistent visual identity across digital platforms.', tags: ['LOGO', 'Branding', 'TYPOGRAPHY'], icon: <><path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-1 1.9-1.9 0-1.2-.9-1.4-.9-2.3 0-.75.65-1.4 1.5-1.4H17a3.5 3.5 0 0 0 3.5-3.5c0-4.2-3.8-7.4-8.5-7.4Z"></path><circle cx="7.5" cy="12" r="1"></circle><circle cx="9.5" cy="8" r="1"></circle><circle cx="14" cy="7.5" r="1"></circle></> },
   { n: '06', title: 'UX Research', desc: 'Understanding user needs through research, competitor analysis, and user flows to create intuitive and practical digital experiences.', tags: ['WIREFRAMING', 'USABILITY', 'INSIGHTS', 'INFORMATION ARCHITECHTURE'], icon: <><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></> },
+  { n: '07', title: 'Vibe Coding', desc: 'Turning designs into real, working products using AI-assisted coding tools — building functional prototypes and websites faster, without losing design quality.', tags: ['AI TOOLS', 'PROTOTYPING', 'NO-CODE', 'RAPID BUILD'], icon: <><polyline points="8 9 4 12 8 15"></polyline><polyline points="16 9 20 12 16 15"></polyline></> },
 ];
 
 const EXPERIENCE = [
@@ -73,7 +72,7 @@ const DESIGN_PICKS = [
 ];
 
 export default function Home() {
-  const [projCat, setProjCat] = useState('Mobile App');
+  const [projCat, setProjCat] = useState('UI/UX Design');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   useIntroTimeline({ playIntro: true, introSpeed: 1.1 });
 
@@ -121,7 +120,8 @@ export default function Home() {
                   <a href="#hero" style={{ color: '#F5F1EA' }}>Home</a>
                   <a href="#about" style={{ color: '#A29889' }}>About</a>
                   <a href="#services" style={{ color: '#A29889' }}>Services</a>
-                  <Link to="/projects" style={{ color: '#A29889' }}>Projects</Link>
+                  <Link to="/projects" style={{ color: '#A29889' }}>UI/UX</Link>
+                  <Link to="/vibe-code" style={{ color: '#A29889' }}>Vibe Code</Link>
                   <Link to="/designs" style={{ color: '#A29889' }}>Designs</Link>
                   <Link to="/contact" style={{ color: '#A29889' }}>Contact</Link>
                 </div>
@@ -244,11 +244,11 @@ export default function Home() {
                   <p data-rv="1" style={{ margin: '22px 0 0', maxWidth: '46ch', fontSize: 15.5, lineHeight: 1.7, color: '#A29889' }}>I focus on designing websites, web apps, dashboards, and mobile apps that are easy to use, visually consistent, and built with real users in mind.</p>
                 </div>
                 <div id="svcStackArea" style={{ minWidth: 0 }}>
-                  {SERVICES.map((s) => (
+                  {SERVICES.map((s, i) => (
                     <div
                       key={s.n}
                       data-svc-card="1"
-                      style={{ marginBottom: s.n === '06' ? 0 : 100, border: '1px solid transparent', borderRadius: 26, minHeight: '20rem', boxSizing: 'border-box', willChange: 'transform', padding: 'clamp(26px,3.5vw,40px)', boxShadow: '0 -6px 24px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.3), 0 28px 70px rgba(0,0,0,0.5), 0 0 44px rgba(240,102,30,0.07), inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -1px 0 rgba(0,0,0,0.3), inset 1px 0 0 rgba(255,255,255,0.05)', overflow: 'hidden', transformOrigin: 'top center', backfaceVisibility: 'hidden' }}
+                      style={{ marginBottom: i === SERVICES.length - 1 ? 0 : 100, border: '1px solid transparent', borderRadius: 26, minHeight: '20rem', boxSizing: 'border-box', willChange: 'transform', padding: 'clamp(26px,3.5vw,40px)', boxShadow: '0 -6px 24px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.3), 0 28px 70px rgba(0,0,0,0.5), 0 0 44px rgba(240,102,30,0.07), inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -1px 0 rgba(0,0,0,0.3), inset 1px 0 0 rgba(255,255,255,0.05)', overflow: 'hidden', transformOrigin: 'top center', backfaceVisibility: 'hidden' }}
                     >
                       <div aria-hidden="true" style={{ position: 'absolute', left: '-20%', top: '-40%', width: '70%', height: '90%', background: 'radial-gradient(circle, rgba(240,102,30,0.12), transparent 65%)', filter: 'blur(24px)', pointerEvents: 'none' }} />
                       <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16 }}>
@@ -327,8 +327,19 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div id="projGrid" data-count={String(projList.length)} style={{ position: 'relative', marginTop: 'clamp(36px,5vw,52px)' }}>
-            {projList.map((p, i) => (
+          <div id="projGrid" data-count={String(projCat === 'Vibe Code' ? 0 : projList.length)} style={{ position: 'relative', marginTop: 'clamp(36px,5vw,52px)' }}>
+            {projCat === 'Vibe Code' && (
+              <div style={{ gridColumn: '1/-1', position: 'relative', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 22, padding: 'clamp(48px,7vw,72px) 24px', textAlign: 'center', overflow: 'hidden', background: 'linear-gradient(165deg,rgba(26,21,18,0.9),rgba(15,12,10,0.95))', boxShadow: '0 18px 50px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.08)' }}>
+                <div aria-hidden="true" style={{ position: 'absolute', left: '50%', top: '-20%', transform: 'translateX(-50%)', width: '50%', height: '80%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(240,102,30,0.16), transparent 65%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
+                <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 58, height: 58, borderRadius: 18, background: 'linear-gradient(135deg,rgba(255,138,64,0.95),rgba(199,66,8,0.95))', border: '1px solid rgba(255,255,255,0.25)', boxShadow: '0 10px 26px rgba(240,102,30,0.35), inset 0 1px 0 rgba(255,255,255,0.32)' }}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFF7F0" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="8 9 4 12 8 15"></polyline><polyline points="16 9 20 12 16 15"></polyline></svg>
+                </span>
+                <div style={{ position: 'relative', marginTop: 22, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, letterSpacing: '0.22em', color: '#F0661E' }}>COMING SOON</div>
+                <h3 style={{ position: 'relative', margin: '12px 0 0', fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: 'clamp(20px,2.6vw,28px)', letterSpacing: '-0.01em' }}>Vibe coding projects are on the way.</h3>
+                <p style={{ position: 'relative', margin: '12px auto 0', maxWidth: '46ch', fontSize: 14.5, lineHeight: 1.7, color: '#A29889' }}>I'm currently building AI-assisted, code-driven projects — check back soon to see them here.</p>
+              </div>
+            )}
+            {projCat !== 'Vibe Code' && projList.map((p, i) => (
               <Link key={p.slug} data-proj="1" data-i={String(i)} to={`/projects/${p.slug}`} style={{ position: 'relative', border: '1px solid transparent', borderRadius: 22, overflow: 'hidden', padding: 12, boxSizing: 'border-box', boxShadow: '0 18px 50px rgba(0,0,0,0.42), 0 0 36px rgba(240,102,30,0.05), inset 0 1px 0 rgba(255,255,255,0.12)', color: '#F5F1EA' }}>
                 {p.nda ? (
                   <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: 14, overflow: 'hidden', background: 'linear-gradient(150deg,#241d18,#171310)' }}>
@@ -360,7 +371,7 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-            {projList.length === 0 && (
+            {projCat !== 'Vibe Code' && projList.length === 0 && (
               <div style={{ gridColumn: '1/-1', border: '1px dashed rgba(255,255,255,0.16)', borderRadius: 18, padding: '44px 24px', textAlign: 'center', color: '#A29889', fontSize: 14.5 }}>
                 Case studies in this category are shared privately — <Link to="/contact" style={{ color: '#F0661E' }}>get in touch</Link> for a walkthrough.
               </div>
@@ -510,7 +521,8 @@ export default function Home() {
           <a data-sec="hero" href="#hero" style={{ color: '#A29889' }}>Home</a>
           <a data-sec="about" href="#about" style={{ color: '#A29889' }}>About</a>
           <a data-sec="services" href="#services" style={{ color: '#A29889' }}>Services</a>
-          <Link to="/projects" style={{ color: '#A29889' }}>Projects</Link>
+          <Link to="/projects" style={{ color: '#A29889' }}>UI/UX</Link>
+          <Link to="/vibe-code" style={{ color: '#A29889' }}>Vibe Code</Link>
           <Link to="/designs" style={{ color: '#A29889' }}>Designs</Link>
           <Link to="/contact" style={{ color: '#A29889' }}>Contact</Link>
         </div>
@@ -520,7 +532,8 @@ export default function Home() {
           <a data-sec="hero" href="#hero" onClick={() => setMobileNavOpen(false)} style={{ display: 'block', color: '#A29889', fontSize: 15, padding: '14px 16px', borderRadius: 12 }}>Home</a>
           <a data-sec="about" href="#about" onClick={() => setMobileNavOpen(false)} style={{ display: 'block', color: '#A29889', fontSize: 15, padding: '14px 16px', borderRadius: 12 }}>About</a>
           <a data-sec="services" href="#services" onClick={() => setMobileNavOpen(false)} style={{ display: 'block', color: '#A29889', fontSize: 15, padding: '14px 16px', borderRadius: 12 }}>Services</a>
-          <Link to="/projects" onClick={() => setMobileNavOpen(false)} style={{ display: 'block', color: '#A29889', fontSize: 15, padding: '14px 16px', borderRadius: 12 }}>Projects</Link>
+          <Link to="/projects" onClick={() => setMobileNavOpen(false)} style={{ display: 'block', color: '#A29889', fontSize: 15, padding: '14px 16px', borderRadius: 12 }}>UI/UX</Link>
+          <Link to="/vibe-code" onClick={() => setMobileNavOpen(false)} style={{ display: 'block', color: '#A29889', fontSize: 15, padding: '14px 16px', borderRadius: 12 }}>Vibe Code</Link>
           <Link to="/designs" onClick={() => setMobileNavOpen(false)} style={{ display: 'block', color: '#A29889', fontSize: 15, padding: '14px 16px', borderRadius: 12 }}>Designs</Link>
           <Link to="/contact" onClick={() => setMobileNavOpen(false)} style={{ display: 'block', color: '#A29889', fontSize: 15, padding: '14px 16px', borderRadius: 12 }}>Contact</Link>
           <Link to="/contact" onClick={() => setMobileNavOpen(false)} style={{ display: 'block', textAlign: 'center', color: '#F0661E', border: '1px solid rgba(240,102,30,0.55)', borderRadius: 999, padding: '13px 22px', fontSize: 14, marginTop: 8 }}>Let's talk</Link>

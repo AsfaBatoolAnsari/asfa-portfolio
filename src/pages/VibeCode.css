@@ -1,0 +1,10 @@
+#vcFeatGrid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+@media (max-width: 849px) {
+  #vcFeatGrid { grid-template-columns: minmax(0,1fr); }
+}
+
+#vcPulse { animation: vcPulse 2.2s ease-in-out infinite; }
+@keyframes vcPulse {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.6); }
+}

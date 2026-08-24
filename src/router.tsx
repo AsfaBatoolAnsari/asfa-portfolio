@@ -9,6 +9,7 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Designs = lazy(() => import('./pages/Designs'));
 const DesignDetail = lazy(() => import('./pages/DesignDetail'));
 const Contact = lazy(() => import('./pages/Contact'));
+const VibeCode = lazy(() => import('./pages/VibeCode'));
 
 const page = (el: React.ReactNode) => <Suspense fallback={null}>{el}</Suspense>;
 
@@ -19,4 +20,5 @@ export const router = createBrowserRouter([
   { path: '/designs', element: page(<Designs />) },
   { path: '/designs/:slug', element: page(<DesignDetail />) },
   { path: '/contact', element: page(<Contact />) },
+  { path: '/vibe-code', element: page(<VibeCode />) },
 ]);

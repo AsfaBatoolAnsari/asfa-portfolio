@@ -4,7 +4,7 @@ import { Hoverable } from './Hoverable';
 import { MobileNavPanel, MobileNavTrigger } from './MobileNavMenu';
 import { sx } from '../lib/sx';
 
-type Section = 'home' | 'about' | 'services' | 'projects' | 'designs' | 'contact';
+type Section = 'home' | 'about' | 'services' | 'projects' | 'designs' | 'vibe-code' | 'contact';
 
 interface NavProps {
   active: Section;
@@ -25,7 +25,8 @@ const NAV_ITEMS: { label: string; to: string; section: Section }[] = [
   { label: 'Home', to: '/', section: 'home' },
   { label: 'About', to: '/#about', section: 'about' },
   { label: 'Services', to: '/#services', section: 'services' },
-  { label: 'Projects', to: '/projects', section: 'projects' },
+  { label: 'UI/UX', to: '/projects', section: 'projects' },
+  { label: 'Vibe Code', to: '/vibe-code', section: 'vibe-code' },
   { label: 'Designs', to: '/designs', section: 'designs' },
   { label: 'Contact', to: '/contact', section: 'contact' },
 ];
@@ -85,7 +86,8 @@ export function Nav({ active, ctaLabel = "Let's talk", ctaHref = '/contact', var
         <Hoverable as={Link} to="/" base={LINK_BASE} hoverCss={LINK_HOVER} style={active === 'home' ? ACTIVE : undefined}>Home</Hoverable>
         <Hoverable as={Link} to="/#about" base={LINK_BASE} hoverCss={LINK_HOVER} style={active === 'about' ? ACTIVE : undefined}>About</Hoverable>
         <Hoverable as={Link} to="/#services" base={LINK_BASE} hoverCss={LINK_HOVER} style={active === 'services' ? ACTIVE : undefined}>Services</Hoverable>
-        <Hoverable as={Link} to="/projects" base={LINK_BASE} hoverCss={LINK_HOVER} style={active === 'projects' ? ACTIVE : undefined}>Projects</Hoverable>
+        <Hoverable as={Link} to="/projects" base={LINK_BASE} hoverCss={LINK_HOVER} style={active === 'projects' ? ACTIVE : undefined}>UI/UX</Hoverable>
+        <Hoverable as={Link} to="/vibe-code" base={LINK_BASE} hoverCss={LINK_HOVER} style={active === 'vibe-code' ? ACTIVE : undefined}>Vibe Code</Hoverable>
         <Hoverable as={Link} to="/designs" base={LINK_BASE} hoverCss={LINK_HOVER} style={active === 'designs' ? ACTIVE : undefined}>Designs</Hoverable>
         <Hoverable as={Link} to="/contact" base={LINK_BASE} hoverCss={LINK_HOVER} style={active === 'contact' ? ACTIVE : undefined}>Contact</Hoverable>
       </div>
