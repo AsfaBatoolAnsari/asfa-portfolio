@@ -28,6 +28,9 @@ export interface Project {
   tools?: string[];
   /** Detail-page gallery: paths under /public, e.g. '/assets/projects/<slug>/1.jpg'. */
   gallery?: string[];
+  /** Detail-page link buttons — only set on 'public' projects; omit to hide. */
+  behance?: string;
+  github?: string;
 }
 
 export interface Design {

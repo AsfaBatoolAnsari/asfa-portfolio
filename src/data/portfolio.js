@@ -11,6 +11,10 @@
 // paths for the detail page's gallery section — same idea, same folder.
 // You're free to rename the path (e.g. to .png) as long as this field and the
 // actual file match.
+//
+// LINKS: `behance` / `github` on a project add a matching button to its detail
+// page — only set on 'public' projects (never on 'nda' ones, which stay hidden).
+// Omit either field to hide that button.
 
 export const projectCategories = ['All', 'Mobile App', 'Web App', 'Website', 'Dashboard'];
 
@@ -33,6 +37,7 @@ export const projects = [
     tools: ['UX Research', 'User Flows', 'Wireframing', 'UI Design', 'Design System', 'Prototyping', 'Figma'],
     image: '/assets/projects/happy-present.jpg',
     gallery: ['/assets/projects/images/happy_present_img1.webp', '/assets/projects/images/happy_present_img2.webp', '/assets/projects/images/happy_present_img3.webp'],
+    behance: 'https://www.behance.net/gallery/168235619/Happy-Present',
   },
   {
     slug: 'bsek-education-portal',
@@ -52,6 +57,7 @@ export const projects = [
     tools: ['UX Research', 'User Flows', 'Information Architecture', 'Wireframing', 'UI Design', 'Prototype', 'Design System', 'Figma'],
     image: '/assets/projects/bsek-education-portal.jpg',
     gallery: ['/assets/projects/images/bsek_img1.webp', '/assets/projects/images/bsek_img2.webp', '/assets/projects/images/bsek_img3.webp'],
+    behance: 'https://www.behance.net/gallery/170786609/Board-Secondary-Education-of-Karachi-%28BSEK%29',
   },
   {
     slug: 'car-parking',
@@ -72,6 +78,7 @@ export const projects = [
     image: '/assets/projects/car-parking.jpg',
     hero: '/assets/projects/car-parking-hero.jpg',
     gallery: ['/assets/projects/images/car_parking1.webp', '/assets/projects/images/car_parking2.webp', '/assets/projects/images/car_parking3.webp'],
+    behance: 'https://www.behance.net/gallery/175807281/Parking-Time',
   },
   {
     slug: 'portfolio-website',
@@ -111,6 +118,7 @@ export const projects = [
     image: '/assets/projects/365-taskers.jpg',
     hero: '/assets/projects/365-taskers-hero.jpg',
     gallery: ['/assets/projects/images/365tasker_img3.webp', '/assets/projects/images/365tasker_img2.webp', '/assets/projects/images/365tasker_img1.webp'],
+    behance: 'https://www.behance.net/gallery/211748741/365Tasker',
   },
   {
     slug: 'donatefy',
