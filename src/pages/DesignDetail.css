@@ -2,3 +2,8 @@
 @media (max-width: 767px) {
   #dMeta { grid-template-columns: minmax(0,1fr); }
 }
+
+/* This cover carries its title near the top — keep it in frame instead of center-cropping it away. */
+#dd-hero-design-tokens::part(image) { object-position: top; }
+/* This cover's title sits mid-frame — center keeps it fully visible. */
+#dd-hero-modern-ui-grid::part(image) { object-position: center; }
