@@ -4,8 +4,16 @@
     {
       "name": "portfolio-dev",
       "runtimeExecutable": "C:\\Program Files\\nodejs\\npm.cmd",
-      "runtimeArgs": ["run", "dev"],
-      "port": 5173
+      "runtimeArgs": ["run", "dev", "--", "--port", "5183", "--strictPort"],
+      "port": 5183,
+      "autoPort": true
+    },
+    {
+      "name": "zenikly",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\npm.cmd",
+      "runtimeArgs": ["--prefix", "C:\\Users\\Hams\\Downloads\\zenikly", "run", "dev"],
+      "port": 5173,
+      "autoPort": true
     }
   ]
 }
