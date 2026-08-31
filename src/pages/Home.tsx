@@ -125,7 +125,8 @@ export default function Home() {
                   <Link to="/designs" style={{ color: '#A29889' }}>Designs</Link>
                   <Link to="/contact" style={{ color: '#A29889' }}>Contact</Link>
                 </div>
-                <Link id="hnCta" to="/contact" style={{ color: '#F0661E', border: '1px solid rgba(240,102,30,0.55)', borderRadius: 999, padding: '9px 22px', fontSize: 14, whiteSpace: 'nowrap' }}>Let's talk</Link>
+                <Link id="hnCta" className="nav-cta-desktop" to="/contact" style={{ color: '#F0661E', border: '1px solid rgba(240,102,30,0.55)', borderRadius: 999, padding: '9px 22px', fontSize: 14, whiteSpace: 'nowrap' }}>Let's talk</Link>
+                <MobileNavTrigger open={mobileNavOpen} onClick={() => setMobileNavOpen((o) => !o)} />
               </nav>
               <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '96px 24px 48px', boxSizing: 'border-box', gap: 0 }}>
                 <div id="chip" style={{ display: 'inline-flex', alignItems: 'center', gap: 9, border: '1px solid rgba(255,255,255,0.12)', borderRadius: 999, padding: '8px 18px', fontFamily: "'JetBrains Mono',monospace", fontSize: 11, letterSpacing: '0.18em', color: '#A29889' }}>

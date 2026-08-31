@@ -55,6 +55,11 @@ export function Starfield({
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let size = { x: 0, y: 0 };
+    // Orbital radius, clamped to fit the container: on a narrow/tall mobile section
+    // the fixed starEscapeWidth (tuned for wide desktop containers) pushed most of
+    // each star's circular path outside the canvas, leaving only two dense vertical
+    // streaks visible where the orbit clipped back in near the left/right edges.
+    let escapeW = starEscapeWidth;
     let imagedata!: ImageData, data!: Uint32Array;
     let stars: Star[] = [];
     const startTime = Date.now();
@@ -75,6 +80,7 @@ export function Starfield({
       // ResizeObserver below re-runs this once the container actually has a size.
       size.x = Math.max(1, container.clientWidth);
       size.y = Math.max(1, container.clientHeight);
+      escapeW = Math.min(starEscapeWidth, size.x * 0.48, size.y * 0.48);
       canvas.width = size.x;
       canvas.height = size.y;
       imagedata = context.createImageData(size.x, size.y);
@@ -88,7 +94,7 @@ export function Starfield({
     };
 
     const STAR_PX = 2; // draw each star as a small block, not a single pixel — much easier to see
-    const brightness = (orbital: number) => Math.min(255, Math.floor((1 - orbital / starEscapeWidth) * maxOpacity * 0.7 + maxOpacity * 0.4 + Math.random() * 60));
+    const brightness = (orbital: number) => Math.min(255, Math.floor((1 - orbital / escapeW) * maxOpacity * 0.7 + maxOpacity * 0.4 + Math.random() * 60));
 
     const plot = (cx: number, cy: number, value: number) => {
       const x0 = Math.floor(cx), y0 = Math.floor(cy);
@@ -101,7 +107,7 @@ export function Starfield({
     };
 
     const createStar = () => {
-      const orbital = (Math.random() * (starEscapeWidth / 2) + 1 + Math.random() * (starEscapeWidth / 2) + starEscapeWidth) / 2;
+      const orbital = (Math.random() * (escapeW / 2) + 1 + Math.random() * (escapeW / 2) + escapeW) / 2;
       const opacity = brightness(orbital);
       const rotation = Math.PI * (Math.random() * 2);
       const basePos = { x: size.x / 2, y: size.y / 2 + orbital };
